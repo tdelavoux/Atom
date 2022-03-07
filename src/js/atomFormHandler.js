@@ -581,10 +581,10 @@
 
             if(notifyAll){
                 errMsg.forEach(function(element) {
-                    $.atomNotification((element.name ? element.name : 'Champ incorrect ') + ' : ' + element.errorMessage, "error");
+                    $.atomNotification((element.name ? element.name : 'Champ incorrect ') + ' : ' + element.errorMessage, "danger");
                 });
             }else if(!notifyNone){
-                $.atomNotification('Des erreurs ont été détectées dans le formulaire. Merci de vérifier les données.', "error");
+                $.atomNotification('Des erreurs ont été détectées dans le formulaire. Merci de vérifier les données.', "danger");
             }
             
             // reinit les flux de données

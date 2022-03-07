@@ -144,7 +144,7 @@
 .a-full-info:focus,.a-full-info:active, .a-full-info:not(:disabled):hover,
 .a-full-secondary:focus,.a-full-secondary:active, .a-full-secondary:not(:disabled):hover{opacity:0.85}
 
-.a-link-primary:hover, .a-link-light:hover, .a-link-success:hover, .a-link-info:hover, .a-full-secondary:hover, .a-link-warning:hover,.a-link-danger:hover{text-decoration:underline}
+.a-link-primary:hover, .a-link-light:hover, .a-link-success:hover, .a-link-info:hover, .a-link-secondary:hover, .a-link-warning:hover,.a-link-danger:hover{text-decoration:underline}
 
 /* -------------------------------------------------------------- Small Files -------------------------------------------------- */
 .a-input-label-file{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding: 0 10px;cursor: pointer; padding: 0.5em;
