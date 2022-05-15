@@ -62,6 +62,7 @@ var atomShuffle = function(customOptions){
         });
     };
 
+    // Delete the instance itself, and all its properties.
     this.destroy = function(self){
         delete self;
     };

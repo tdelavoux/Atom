@@ -11,13 +11,13 @@
     /* Activation au clic sur un bouton de soumission
     * Vérifie l'ensemble des champs du formulaire
     *
-    * @use	optional	data-function	                Fonction JS associé au boutton si celui ci ne submit pas de formulaire. La fonction est lancé si aucun élément n'est bloquant
-    * @use  optional    check-invisible                 Défini si les champs masqués doivent être pris en compte
-    * @use  optional    notify-none                     Si reneigné,disable les notofications globales
-    * @use  optional    notify-all                      Si reneigné,toutes les erreurs sont notifiées
-    * @use  optional    a-disable-color                 Si reneigné, ne colore pas les inputs en erreur
-    * @use  optional    input-notify-none               Si reneigné, disable les message des inputs
-    * @use  optional    data-opt-bloc                   Fonction de blocage personnalisée. Si retourne false, bloque le formulaire
+    * @use	optional	a-data-function	                  Fonction JS associé au boutton si celui ci ne submit pas de formulaire. La fonction est lancé si aucun élément n'est bloquant
+    * @use  optional    a-check-invisible                 Défini si les champs masqués doivent être pris en compte
+    * @use  optional    a-notify-none                     Si reneigné,disable les notofications globales
+    * @use  optional    a-notify-all                      Si reneigné,toutes les erreurs sont notifiées
+    * @use  optional    a-disable-color                   Si reneigné, ne colore pas les inputs en erreur
+    * @use  optional    a-input-notify-none               Si reneigné, disable les message des inputs
+    * @use  optional    a-data-opt-bloc                   Fonction de blocage personnalisée. Si retourne false, bloque le formulaire
     */
     $('.a-form-handler').click(function(){
 
@@ -424,8 +424,6 @@
          * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
          * @use optional  a-name           : nom du champ pour identifcation de l'erreur
          * @use optional  a-disable-message : Permet de désactiver l'affichage des message sous les champs input
-         * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
-         * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
          * 
          */
         $('.a-verify-checked', form).each(function(){
@@ -495,8 +493,11 @@
          * --------- Vérification Des Radios  ----------
          * 
          * Verification simple que l'un des boutons radio a été sélectionné dans la liste des radio de méme noms
-         *  @use optional  data-name		: nom du champ pour identifcation de l'erreur
-         *  @use optional  disable-message  : Permet de désactiver l'affichage des message sous les champs input
+         * 
+         *  @use optional  a-alternate-verif    : Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+         *  @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
+         *  @use optional  a-name		        : nom du champ pour identifcation de l'erreur
+         *  @use optional  a-disable-message    : Permet de désactiver l'affichage des message sous les champs input
          */
         $('.a-verify-radio', form).each(function(){
 
@@ -530,8 +531,10 @@
          * --------- Vérification Des Input Files  ----------
          * Verification simple que l'un des input files a bien un fichier sélectionné
          * 
-         * @use optional  data-name        : Nom du champs pour l'affichage des erreurs
-         * @use optional  disable-message  : Permet de désactiver l'affichage des message sous les champs input
+         * @use optional  a-alternate-verif     : Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+         * @use optional  a-error-message       : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
+         * @use optional  a-name                : Nom du champs pour l'affichage des erreurs
+         * @use optional  a-disable-message     : Permet de désactiver l'affichage des message sous les champs input
          */
         $('.a-verify-file', form).each(function(){
 
