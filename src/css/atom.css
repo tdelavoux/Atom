@@ -320,7 +320,8 @@ input.a-borderfull:read-only, input.a-borderfull:disabled{background-color:var(-
 .a-bg-success{color: var(--p-sucess)}
 
 .a-sort{position:relative;}
-.a-sort:after{font-family: 'Font Awesome 5 Free';content: "\f0dc"; font-weight: 900;opacity:0.6;position:absolute;right: 10px; top: 10px;display: block;margin:0 0.3em}
+.a-sort:after{font-family: 'Font Awesome';content: "\f0dc"; font-weight: 900;opacity:0.6;position:absolute;right: 10px; top: 10px;display: block;margin:0 0.3em}
+.a-hide{display:none;}
 
 /* ----------------------------------------- Placements ---------------------------------------------------------------------- */
 

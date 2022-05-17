@@ -1,4 +1,3 @@
-
 (function($){
     $.fn.atomCounter = function(customOptions){
 
@@ -63,4 +62,4 @@
         }
     };
 
-})(jQuery)
+})(jQuery);

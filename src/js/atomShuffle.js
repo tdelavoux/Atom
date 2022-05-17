@@ -1,6 +1,6 @@
 (function($){
     $.fn.atomShuffleInstance = function(customClass){
-
+        
         const className = customClass && customClass instanceof String ? '.' + customClass : '.shufflingItem';
 
         this.initialize = function() {
@@ -12,7 +12,7 @@
                         $(this).is(':visible') && !$(this).attr('data-title').toLowerCase().includes(input) && $(this).hide(300);
                     });
                 }else{
-                    $(className + ':hidden').show(400);
+                    $(className + ':hidden').show();
                 }
             });
             return this;
@@ -40,7 +40,7 @@ var atomShuffle = function(customOptions){
     var options = {
         itemSelector  : '.atomShuffleItem',
         animationTime : 400,
-        visibility    : false
+        visibility    : false,
     };
  
     /*
@@ -57,12 +57,12 @@ var atomShuffle = function(customOptions){
     this.filter = function(funct){
         $(options.itemSelector).each(function(){
             $visible =  funct($(this));
-            $visible && (options.visibility  || $(this).is(':hidden')) && $(this).show(options.animationTime);
-            !$visible && (options.visibility  || $(this).is(':visible')) && $(this).hide(options.animationTime);
+            $isHidden = $(this).hasClass('a-hide');
+            $visible && (options.visibility  || $isHidden) &&  $(this).removeClass('a-hide');
+            !$visible && (options.visibility  || !$isHidden) && $(this).addClass('a-hide');
         });
     };
 
-    // Delete the instance itself, and all its properties.
     this.destroy = function(self){
         delete self;
     };
@@ -71,6 +71,4 @@ var atomShuffle = function(customOptions){
      * Pass options when class instantiated
      */
     this.construct(customOptions);
- 
 };
-
