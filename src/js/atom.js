@@ -535,8 +535,8 @@ $('.a-count-area>textarea').trigger('keyup');
             addClassSortHead();
             addClassFilter();
             addInputShuffleField();
-            buildPagination();
-            displayPages(0);
+            buildPagination(0);
+            options.nbPerPage &&displayPages(0);
 
             function addClassFilter(){
                 table.find('tbody').find('tr').addClass(`atom-tr-${tableid}`);
@@ -775,9 +775,9 @@ $('.a-count-area>textarea').trigger('keyup');
 
                 var nbPages = parseInt(rows.length/options.nbPerPage)+1;
                 var colspan = table.children('tbody').children('tr:first-child').children('td').length;
-                table.append('<tfoot><tr><td class="text-center" colspan="'+colspan+'">');
+                table.append('<tfoot><tr><td class="center a-paginate-line" colspan="'+colspan+'">');
                 for(var i = 0; i<nbPages; i++){
-                    table.children('tfoot').children('tr').children('td').append('<button type="button" data-index="'+i+'" class="a-btn-sm a-primary">'+(i+1)+'</button>');
+                    table.children('tfoot').children('tr').children('td').append('<button type="button" data-index="'+i+'" class="a-btn-sm a-primary a-paginate-btn">'+(i+1)+'</button>');
                 }
 
                 //Create buttons ...
