@@ -6,8 +6,7 @@
         const direction = ['asc', 'desc'];
         const types     = ['string', 'number', 'Ymd', 'm/d/Y', 'm-d-y', 'd/m/Y', 'd-m-y'];
 
-        var tableid = Date.now().toString(Math.floor(Math.random() * 10) + 10) +  Math.floor(Math.random() * 1000).toString(Math.floor(Math.random() * 10) + 10);                                                               // TODO WTF ?
-
+        var tableid = Date.now().toString(Math.floor(Math.random() * 10) + 10) +  Math.floor(Math.random() * 1000).toString(Math.floor(Math.random() * 10) + 10);
 
         var regex = {
 			dateDb     : /^((19|20)\d{2})((0|1)\d{1})([0-3]\d{1})/g,
@@ -274,16 +273,34 @@
                 });
                 table.children('tbody').append(rows);
 
+                var classNames = [];
+                var tableHeader = table.find('thead[class*="a-table-header"]');
+                var paginateClass = 'a-primary';
+                if(tableHeader.length){
+                    $.each( tableHeader.attr('class').split(/\s+/), function( key, value ) {
+                        if(value.match('a-table-header')){
+                            var split = value.split('-');
+                            paginateClass = 'a-' + split[split.length - 1];
+                        }
+                      });
+                }
+
                 var nbPages = parseInt(rows.length/options.nbPerPage)+1;
                 var colspan = table.children('tbody').children('tr:first-child').children('td').length;
                 table.append('<tfoot><tr><td class="center a-paginate-line" colspan="'+colspan+'">');
                 for(var i = 0; i<nbPages; i++){
-                    table.children('tfoot').children('tr').children('td').append('<button type="button" data-index="'+i+'" class="a-btn-sm a-primary a-paginate-btn">'+(i+1)+'</button>');
+                    table.children('tfoot').children('tr').children('td').append(`<button type="button" data-index="${i}" class="a-btn-sm ${paginateClass} a-paginate-btn ${i === 0 ? 'a-active': ''}">${i+1}</button>`);
                 }
 
+                $('.a-paginate-btn').click(function() {
+                        $('.a-paginate-btn').removeClass('a-active');
+                        $(this).addClass('a-active');
+                })
+                // TODO réaffecter le bouton actif quand celui-ci disparait
+
                 //Create buttons ...
-                $('<button id="etcBtnEnd" type="button" class="a-btn-sm a-primary">...</button>').insertBefore(table.children('tfoot').children('tr').children('td').children('button:last-child'));
-                $('<button id="etcBtnStart" type="button" class="a-btn-sm a-primary">...</button>').insertAfter(table.children('tfoot').children('tr').children('td').children('button:first-child'));
+                $(`<button id="etcBtnEnd" type="button" class="a-btn-sm ${paginateClass}">...</button>`).insertBefore(table.children('tfoot').children('tr').children('td').children('button:last-child'));
+                $(`<button id="etcBtnStart" type="button" class="a-btn-sm ${paginateClass}">...</button>`).insertAfter(table.children('tfoot').children('tr').children('td').children('button:first-child'));
                
                 //Change of page
                 table.children('tfoot').children().children().children().click(function(){
@@ -308,13 +325,21 @@
             /**
              * Display buttons for change of pages
              * if maxBtn is null, then the number of max buttons stay the same as before
+             *
              */
             function displayPagesBtn(maxBtn){
+                // TODO Fix launched as duplicate when input change 
                 if(maxBtn == null){
                     maxBtn = parseInt(table.children('tfoot').children().children().children('button:not(.a-hide)').last().attr('data-index'));
                 }
 
                 var currPage = parseInt(table.attr('data-page'));
+
+                // TODO conflits sur tables multiples
+                if(!$('.a-paginate-btn.a-active').is(':visible')){
+                    $('.a-paginate-btn.a-active').removeClass('a-active');
+                    $('.a-paginate-btn:first').addClass('a-active');
+                }  
 
                 var btns = table.children('tfoot').children().children().children();
 

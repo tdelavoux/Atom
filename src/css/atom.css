@@ -73,22 +73,22 @@
 .a-btn-sm{padding: 6px 8px;font-size: 12px}
 .a-btn-xs{padding: 5px 7px; font-size:10px}
 
-.a-primary {border: 1px solid var(--p-primary);color: var(--p-primary)}
-.a-primary:focus,.a-primary:active, .a-primary:not(:disabled):hover,.a-check:checked + .a-primary{background-color: var(--p-primary) ;border: 1px solid var(--p-primary);color:var(--white)}
-.a-danger {border: 1px solid var(--p-danger);color: var(--p-danger)}
-.a-danger:focus,.a-danger:active, .a-danger:not(:disabled):hover,.a-check:checked + .a-danger{background-color: var(--p-danger) ;border: 1px solid var(--p-danger);color:var(--white)}
+.a-primary{border: 1px solid var(--p-primary);color: var(--p-primary)}
+.a-primary:focus,.a-primary:active, .a-primary:not(:disabled):hover,.a-check:checked + .a-primary, .a-primary.a-active{background-color: var(--p-primary) ;border: 1px solid var(--p-primary);color:var(--white)}
+.a-danger{border: 1px solid var(--p-danger);color: var(--p-danger)}
+.a-danger:focus,.a-danger:active, .a-danger:not(:disabled):hover,.a-check:checked + .a-danger, .a-danger.a-active{background-color: var(--p-danger) ;border: 1px solid var(--p-danger);color:var(--white)}
 .a-warning {border: 1px solid var(--p-waring);color: var(--p-waring)}
-.a-warning:focus,.a-warning:active, .a-warning:not(:disabled):hover,.a-check:checked + .a-warning{background-color: var(--p-waring) ;border: 1px solid var(--p-waring);color:var(--white)}
+.a-warning:focus,.a-warning:active, .a-warning:not(:disabled):hover,.a-check:checked + .a-warning, .a-warning.a-active{background-color: var(--p-waring) ;border: 1px solid var(--p-waring);color:var(--white)}
 .a-light {border: 1px solid var(--p-light);color: var(--p-light)}
-.a-light:focus,.a-light:active, .a-light:not(:disabled):hover,.a-check:checked + .a-light{background-color: var(--p-light) ;border: 1px solid var(--p-light);color:var(--white)}
+.a-light:focus,.a-light:active, .a-light:not(:disabled):hover,.a-check:checked + .a-light, .a-light.a-active{background-color: var(--p-light) ;border: 1px solid var(--p-light);color:var(--white)}
 .a-success {border: 1px solid var(--p-sucess);color: var(--p-sucess)}
-.a-success:focus,.a-success:active, .a-success:not(:disabled):hover,.a-check:checked + .a-success{background-color: var(--p-sucess) ;border: 1px solid var(--p-sucess);color:var(--white)}
+.a-success:focus,.a-success:active, .a-success:not(:disabled):hover,.a-check:checked + .a-success, .a-success.a-active{background-color: var(--p-sucess) ;border: 1px solid var(--p-sucess);color:var(--white)}
 .a-info {border:1px solid var(--p-info);color: var(--p-info)}
 .a-info:focus,.a-info:active, .a-info:not(:disabled):hover,.a-check:checked + .a-info{background-color: var(--p-info) ;border: 1px solid var(--p-info);color:var(--white)}
 .a-secondary {border: 1px solid var(--p-secondary);color: var(--p-secondary)}
-.a-secondary:focus,.a-secondary:active, .a-secondary:not(:disabled):hover,.a-check:checked + .a-secondary{background-color: var(--p-secondary) ;border: 1px solid var(--p-secondary);color:var(--white)}
+.a-secondary:focus,.a-secondary:active, .a-secondary:not(:disabled):hover,.a-check:checked + .a-secondary, .a-secondary.a-active{background-color: var(--p-secondary) ;border: 1px solid var(--p-secondary);color:var(--white)}
 .a-dark {border: 1px solid var(--t-light);color: var(--t-light)}
-.a-dark:focus,.a-dark:active, .a-dark:not(:disabled):hover,.a-check:checked + .a-dark{background-color: var(--t-light) ;border: 1px solid var(--t-light);color:var(--white)}
+.a-dark:focus,.a-dark:active, .a-dark:not(:disabled):hover,.a-check:checked + .a-dark, .a-dark.a-active{background-color: var(--t-light) ;border: 1px solid var(--t-light);color:var(--white)}
 
 .a-full-danger,.a-full-danger:hover {border: 1px solid var(--p-danger);color: var(--white);background-color: var(--p-danger);text-decoration:none}
 .a-full-warning,.a-full-warning:hover {border: 1px solid var(--p-waring);color: var(--white);background-color: var(--p-waring);text-decoration:none}
@@ -243,8 +243,8 @@ input.a-input:disabled, input.a-input:read-only{border-radius: 5px 5px 0px 0px; 
 input.a-borderfull:read-only, input.a-borderfull:disabled{background-color:var(--light-hover-gray);}
 
 /* ------------------- TABLES  -----------------------------------------------*/
-.a-table{width:100%; margin:1em 0; border-spacing:0;border-collapse: collapse;}
-.a-table>tbody>tr>td, .a-table>tbody>tr>th, .a-table>thead>tr>th, .a-table>thead>tr>td{padding: 0.6em 0.8em}
+.a-table{width:100%; margin:1em 0; border-spacing:0;border-collapse: collapse}
+.a-table>tbody>tr>td, .a-table>tbody>tr>th, .a-table>thead>tr>th, .a-table>thead>tr>td{padding: 0.9em}
 .a-table>tbody>tr{border-bottom: solid 1px var(--light-border-gray)}
 .a-table thead{border-bottom:solid 2px var(--medium-border-gray)}
 .a-table .a-table-header-dark, .a-table .a-table-header-primary, .a-table .a-table-header-secondary, .a-table .a-table-header-success, .a-table .a-table-header-danger, 
@@ -252,8 +252,8 @@ input.a-borderfull:read-only, input.a-borderfull:disabled{background-color:var(-
 .a-thead-center>tr>*, .a-body-center>tr>*{text-align:center}
 
 .a-table-hover > tbody > tr:hover{background-color:var(--light-hover-gray);}
-.a-table-stripped > tbody > tr:nth-child(even){background-color:var(--ivory)}
-.a-table-delimited  th, .a-table-delimited  td{border:solid 1px var(--light-border-gray)}
+.a-table-stripped > tbody > tr:nth-child(even){background-color:#EEEEEE}
+.a-table-delimited  th, .a-table-delimited  td{border:solid 1px var(--light-border-gray);}
 .a-table-delimited thead {border:unset;}
 
 .a-table-header-dark tr th{color:var(--white);background-color:var(--t-light)}
