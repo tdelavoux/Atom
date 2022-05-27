@@ -329,7 +329,7 @@ $('.a-count-area>textarea').trigger('keyup');
 		clickToHide: true,
 		autoHide: true,
 		autoHideDelay: 7000,
-		alignment: "bottom right",
+		alignment: "top right",
 		type: "success",
 		showAnimationTime: 450,
 		hideAnimationDuration: 200,
