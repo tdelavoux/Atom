@@ -332,16 +332,16 @@
                 
                 //Displaying ... buttons at the start and/or at the end
                 if(maxBtn > 3 && maxBtn-4 >= currPage){
-                    $('#etcBtnEnd').removeClass('a-hide');
-                    $('#etcBtnEnd').insertBefore($('button[data-index="'+maxBtn+'"]'));
+                    $(table).find('#etcBtnEnd').removeClass('a-hide');
+                    $(table).find('#etcBtnEnd').insertBefore($(table).find('button[data-index="'+maxBtn+'"]'));
                 }else{
-                    $('#etcBtnEnd').addClass('a-hide');
+                    $(table).find('#etcBtnEnd').addClass('a-hide');
                 }
 
                 if(currPage-2 > 1){
-                    $('#etcBtnStart').removeClass('a-hide');
+                    $(table).find('#etcBtnStart').removeClass('a-hide');
                 }else{
-                    $('#etcBtnStart').addClass('a-hide');
+                    $(table).find('#etcBtnStart').addClass('a-hide');
                 }
             }
 
