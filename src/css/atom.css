@@ -252,7 +252,14 @@ input.a-borderfull:read-only, input.a-borderfull:disabled{background-color:var(-
 .a-thead-center>tr>*, .a-body-center>tr>*{text-align:center}
 
 .a-table-hover > tbody > tr:hover{background-color:var(--light-hover-gray);}
-.a-table-stripped > tbody > tr:nth-child(even){background-color:var(--ivory)}
+/* Permet de récupérer les lignes impaires, quelles soient cachées ou non. En attendant https://caniuse.com/css-nth-child-of */
+.a-table-stripped > tbody > tr[data-nb$="1"],
+.a-table-stripped > tbody > tr[data-nb$="3"],
+.a-table-stripped > tbody > tr[data-nb$="5"],
+.a-table-stripped > tbody > tr[data-nb$="7"],
+.a-table-stripped > tbody > tr[data-nb$="9"] {
+    background-color:var(--ivory);
+}
 .a-table-delimited  th, .a-table-delimited  td{border:solid 1px var(--light-border-gray)}
 .a-table-delimited thead {border:unset;}
 
