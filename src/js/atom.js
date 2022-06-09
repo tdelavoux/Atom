@@ -1493,9 +1493,9 @@ $(function(){
         }else{
             if(callback){
                 eval(callback);
-                $((form ? '#' + form  : 'form')).submit(function(e) {e.preventDefault();});
+                form.submit(function(e) {e.preventDefault();});
             }else{
-                $((form ? '#' + form  : 'form')).unbind('submit').submit();
+                form.unbind('submit').submit();
             }
         }
         reinitColor();
