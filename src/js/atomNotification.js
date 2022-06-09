@@ -75,7 +75,7 @@ $(function (factory) {
 
     function initializeWrappers(){
         for (const key in wrappers){
-            !document.getElementById(wrappers[key].id) && $('body').append(wrappers[key].html);
+            $(wrappers[key].id).length === 0 && $('body').append(wrappers[key].html);
         }
     }
 
