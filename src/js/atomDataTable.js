@@ -131,12 +131,12 @@
                         throwError(value, rows);
                     }
                     
-                        if(ascending){
-                            return a.children[value].innerHTML - b.children[value].innerHTML;
+                    if(ascending){
+                        return a.children[value].innerHTML - b.children[value].innerHTML;
                     }
                     
-                            return b.children[value].innerHTML - a.children[value].innerHTML;
-                    
+                    return b.children[value].innerHTML - a.children[value].innerHTML;
+
                 });
             }
 
@@ -387,7 +387,7 @@
         this.destroy = function(){ this.unbind(); return null;}
 
        if(this.length > 1){
-            console.log('Atom Datatable : Can\'t initialize on mutilple objects.');
+            console.log('Atom Datatable : Can\'t initialize on multiple objects.');
         }else{
             return this.initialize(customOptions);
         }

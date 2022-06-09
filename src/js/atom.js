@@ -88,7 +88,7 @@
         this.destroy = function() { this.unbind(); return null;};
 
         if(this.length > 1){
-            console.log('Atom Shuffle : Can\'t initialize on mutilple objects.');
+            console.log('Atom Shuffle : Can\'t initialize on multiple objects.');
         }else{
             return this.initialize();
         }
@@ -886,7 +886,7 @@ $('.a-count-area>textarea').trigger('keyup');
         this.destroy = function(){ this.unbind(); return null;}
 
        if(this.length > 1){
-            console.log('Atom Datatable : Can\'t initialize on mutilple objects.');
+            console.log('Atom Datatable : Can\'t initialize on multiple objects.');
         }else{
             return this.initialize(customOptions);
         }
