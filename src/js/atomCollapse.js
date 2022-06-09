@@ -1,15 +1,16 @@
 $(document.body).on('click', '.a-collapsable',
     function(){
-        
-        var object     = $(this);
-        var target     = object.attr('collapse-target');
-        if($(target).hasClass('collapsed') || $(target).hasClass('a-collapsed')){
-            $(target).show(300);
-            $(target).removeClass('collapsed');
-            $(target).removeClass('a-collapsed');
+        const object     = $(this);
+        const target     = object.attr('collapse-target') 
+            ? $(object.attr('collapse-target'))
+            : object.next('.a-panel-content'); // By default, use the a-panel-content following the header
+        if(target.hasClass('collapsed') || target.hasClass('a-collapsed')){
+            target.show(300);
+            target.removeClass('collapsed');
+            target.removeClass('a-collapsed');
         }else{
-            $(target).addClass('collapsed');
-            $(target).hide(300);
+            target.addClass('collapsed');
+            target.hide(300);
         }
     }
 );
@@ -56,4 +57,4 @@ $(document.body).on('click', '.a-collapsable',
             return this.initialize(customOptions);
         }
     };
-})(jQuery)
+})(jQuery);
