@@ -30,10 +30,10 @@
          $.extend(options , customOptions);
 
          var object     = $(this);
-         var text       = object.text();
+         var text       = object.html();
          var target     = $($(this).attr('collapse-target'));
          object.addClass('a-pointer');
-         object.click(function(){
+         object.on('click', function(){
              if(object.hasClass('collapsed')){
                  object.html(text);
                  object.removeClass('collapsed');
