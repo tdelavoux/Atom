@@ -329,7 +329,7 @@ $('.a-count-area>textarea').trigger('keyup');
 		clickToHide: true,
 		autoHide: true,
 		autoHideDelay: 7000,
-		alignment: "bottom right",
+		alignment: "top right",
 		type: "success",
 		showAnimationTime: 450,
 		hideAnimationDuration: 200,
@@ -1492,9 +1492,9 @@ $(function(){
         }else{
             if(callback){
                 eval(callback);
-                $((form ? '#' + form  : 'form')).submit(function(e) {e.preventDefault();});
+                form.submit(function(e) {e.preventDefault();});
             }else{
-                $((form ? '#' + form  : 'form')).unbind('submit').submit();
+                form.unbind('submit').submit();
             }
         }
         reinitColor();
