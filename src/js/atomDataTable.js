@@ -66,7 +66,7 @@
                 if(options.filterableColumn instanceof Array){
                     var txtRes = '';
                     options.filterableColumn.forEach(function(index){
-                        txtRes += $(`td:nth-child(${index - 1})` , element).text();
+                        txtRes += $(`td:nth-child(${index + 1})` , element).text();
                     });
                     return txtRes.toLowerCase().includes(inputValue);
                 }else{
@@ -127,15 +127,16 @@
 
             function sortNumber(rows, value, ascending){
                 rows.sort(function(a,b){
-                    if(!isNaN(a.children[value].innerHTML) && !isNaN(b.children[value].innerHTML)){
-                        if(ascending){
-                            return a.children[value].innerHTML - b.children[value].innerHTML;
-                        }else{
-                            return b.children[value].innerHTML - a.children[value].innerHTML;
-                        }
-                    }else{
+                    if(isNaN(a.children[value].innerHTML) || isNaN(b.children[value].innerHTML)){
                         throwError(value, rows);
                     }
+                    
+                        if(ascending){
+                            return a.children[value].innerHTML - b.children[value].innerHTML;
+                    }
+                    
+                            return b.children[value].innerHTML - a.children[value].innerHTML;
+                    
                 });
             }
 
