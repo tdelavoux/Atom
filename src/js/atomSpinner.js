@@ -10,13 +10,13 @@
 
         this.spin = function(content='') { 
             $(this).html('<span class="flex-center"><i class="fas fa-circle-notch fa-spin mr-05"></i> ' + content + '</span>');
-			//$(this).prop("disabled", true);
+			$(this).prop("disabled", true);
 			$(this).addClass("spin");
         };
 
         this.stop = function(){ 
             $(this).html(content);
-			//$(this).prop("disabled", false);
+			$(this).prop("disabled", false);
 			$(this).removeClass("spin");
         };
 

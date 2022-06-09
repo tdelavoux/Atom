@@ -3,16 +3,17 @@
  */
  $(document.body).on('click', '.a-collapsable',
  function(){
-     
-     var object     = $(this);
-     var target     = object.attr('collapse-target');
-     if($(target).hasClass('collapsed') || $(target).hasClass('a-collapsed')){
-         $(target).show(300);
-         $(target).removeClass('collapsed');
-         $(target).removeClass('a-collapsed');
+     const object     = $(this);
+     const target     = object.attr('collapse-target') 
+         ? $(object.attr('collapse-target'))
+         : object.next('.a-panel-content'); // By default, use the a-panel-content following the header
+     if(target.hasClass('collapsed') || target.hasClass('a-collapsed')){
+         target.show(300);
+         target.removeClass('collapsed');
+         target.removeClass('a-collapsed');
      }else{
-         $(target).addClass('collapsed');
-         $(target).hide(300);
+         target.addClass('collapsed');
+         target.hide(300);
      }
  }
 );
@@ -87,7 +88,7 @@
         this.destroy = function() { this.unbind(); return null;};
 
         if(this.length > 1){
-            console.log('Atom Shuffle : Can\'t initialize on mutilple objects.');
+            console.log('Atom Shuffle : Can\'t initialize on multiple objects.');
         }else{
             return this.initialize();
         }
@@ -456,13 +457,13 @@ $('.a-count-area>textarea').trigger('keyup');
 
         this.spin = function(content='') { 
             $(this).html('<span class="flex-center"><i class="fas fa-circle-notch fa-spin mr-05"></i> ' + content + '</span>');
-			//$(this).prop("disabled", true);
+			$(this).prop("disabled", true);
 			$(this).addClass("spin");
         };
 
         this.stop = function(){ 
             $(this).html(content);
-			//$(this).prop("disabled", false);
+			$(this).prop("disabled", false);
 			$(this).removeClass("spin");
         };
 
@@ -885,7 +886,7 @@ $('.a-count-area>textarea').trigger('keyup');
         this.destroy = function(){ this.unbind(); return null;}
 
        if(this.length > 1){
-            console.log('Atom Datatable : Can\'t initialize on mutilple objects.');
+            console.log('Atom Datatable : Can\'t initialize on multiple objects.');
         }else{
             return this.initialize(customOptions);
         }

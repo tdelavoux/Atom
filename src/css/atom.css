@@ -277,6 +277,9 @@ input.a-borderfull:read-only, input.a-borderfull:disabled{background-color:var(-
 .a-table-header-light > tr > th{color:var(--t-light);background-color:var(--h-light) }
 .a-table th{text-align: left;}
 
+.a-table-sticky > tr > th,
+.a-table-sticky > tr > td { position: sticky; top: 0px; z-index:100; }
+
 /* ----------------------------------------- ATOM COUNTER ------------------------------------------------------------------- */
 .atom-counter{display:flex;align-items: center; justify-content: space-between}
 .atom-counter-btn{padding:0.4em 0;font-size: 10px}

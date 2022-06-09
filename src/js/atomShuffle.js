@@ -21,7 +21,7 @@
         this.destroy = function() { this.unbind(); return null;};
 
         if(this.length > 1){
-            console.log('Atom Shuffle : Can\'t initialize on mutilple objects.');
+            console.log('Atom Shuffle : Can\'t initialize on multiple objects.');
         }else{
             return this.initialize();
         }

@@ -65,7 +65,7 @@
                 if(options.filterableColumn instanceof Array){
                     var txtRes = '';
                     options.filterableColumn.forEach(function(index){
-                        txtRes += $(`td:nth-child(${index - 1})` , element).text();
+                        txtRes += $(`td:nth-child(${index + 1})` , element).text();
                     });
                     return txtRes.toLowerCase().includes(inputValue);
                 }else{
@@ -126,15 +126,16 @@
 
             function sortNumber(rows, value, ascending){
                 rows.sort(function(a,b){
-                    if(!isNaN(a.children[value].innerHTML) && !isNaN(b.children[value].innerHTML)){
-                        if(ascending){
-                            return a.children[value].innerHTML - b.children[value].innerHTML;
-                        }else{
-                            return b.children[value].innerHTML - a.children[value].innerHTML;
-                        }
-                    }else{
+                    if(isNaN(a.children[value].innerHTML) || isNaN(b.children[value].innerHTML)){
                         throwError(value, rows);
                     }
+                    
+                    if(ascending){
+                        return a.children[value].innerHTML - b.children[value].innerHTML;
+                    }
+                    
+                    return b.children[value].innerHTML - a.children[value].innerHTML;
+
                 });
             }
 
@@ -357,16 +358,16 @@
                 
                 //Displaying ... buttons at the start and/or at the end
                 if(maxBtn > 3 && maxBtn-4 >= currPage){
-                    $('#etcBtnEnd').removeClass('a-hide');
-                    $('#etcBtnEnd').insertBefore($('button[data-index="'+maxBtn+'"]'));
+                    $(table).find('#etcBtnEnd').removeClass('a-hide');
+                    $(table).find('#etcBtnEnd').insertBefore($(table).find('button[data-index="'+maxBtn+'"]'));
                 }else{
-                    $('#etcBtnEnd').addClass('a-hide');
+                    $(table).find('#etcBtnEnd').addClass('a-hide');
                 }
 
                 if(currPage-2 > 1){
-                    $('#etcBtnStart').removeClass('a-hide');
+                    $(table).find('#etcBtnStart').removeClass('a-hide');
                 }else{
-                    $('#etcBtnStart').addClass('a-hide');
+                    $(table).find('#etcBtnStart').addClass('a-hide');
                 }
             }
 
@@ -411,7 +412,7 @@
         this.destroy = function(){ this.unbind(); return null;}
 
        if(this.length > 1){
-            console.log('Atom Datatable : Can\'t initialize on mutilple objects.');
+            console.log('Atom Datatable : Can\'t initialize on multiple objects.');
         }else{
             return this.initialize(customOptions);
         }
