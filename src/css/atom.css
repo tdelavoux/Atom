@@ -159,6 +159,7 @@
 .a-round-img-xl{border-radius: 50%;width:90px;height: 90px;margin: 0.5em;background-position: center;background-repeat: no-repeat;background-size: cover;}
 .a-round-img{border-radius: 50%;width:65px;height: 65px;margin: 0.5em;background-position: center;background-repeat: no-repeat;background-size: cover;}
 .a-round-img-sm{border-radius: 50%;width:40px;height: 40px;margin: 0em 0.3em;background-position: center;background-repeat: no-repeat;background-size: cover;display:flex;}
+.a-round-img-xs{border-radius: 50%;width:30px;height: 30px;margin: 0em 0.3em;background-position: center;background-repeat: no-repeat;background-size: cover;display:flex;}
 
 /* -------------------------------------------------------------- Long Files  --------------------------------------------------*/
 .a-uploader {clear: both;margin: 0 auto; min-width:400px;min-height:200px; overflow:hidden; display: flex;align-items: center; justify-content: center;}
@@ -193,6 +194,16 @@
 .a-alert-warning{color: var(--t-waring);background-color:var(--h-waring);border-left: solid 4px var(--t-waring)}
 .a-alert-danger{color: var(--t-danger);background-color:var(--h-danger);border-left: solid 4px var(--t-danger)}
 .a-alert-info{color: var(--t-info);background-color:var(--h-info);border-left: solid 4px var(--t-info)}
+
+[class*='a-light-']{border:solid 1px var(--h-light);}
+.a-light-primary{color: var(--p-primary);background-color: transparent; border-left: solid 4px var(--h-primary)}
+.a-light-secondary{color: var(--p-secondary);background-color: transparent;border-left: solid 4px var(--h-secondary)}
+.a-light-success{color: var(--p-sucess);background-color: transparent;border-left: solid 4px var(--h-sucess);}
+.a-light-light{color: var(--p-light);background-color:transparent;border-left: solid 4px var(--h-light)}
+.a-light-dark{color: var(--p-light);background-color: transparent;border-left: solid 4px #2f3030}
+.a-light-warning{color: var(--p-waring);background-color:transparent;border-left: solid 4px var(--h-waring)}
+.a-light-danger{color: var(--p-danger);background-color:transparent;border-left: solid 4px var(--h-danger)}
+.a-light-info{color: var(--p-info);background-color:transparent;border-left: solid 4px var(--h-info)}
 
 
 /* ---------------------- PANELS --------------------------------------- */
