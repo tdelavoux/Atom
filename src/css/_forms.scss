@@ -187,7 +187,6 @@ select.a-input:focus + label:last-of-type {
   transition: opacity 0.4s ease;
 }
 .a-input {
-  overflow: hidden;
   border: none;
   border-bottom: solid 1px var(--medium-border-gray);
   padding: 7px;
@@ -196,6 +195,9 @@ select.a-input:focus + label:last-of-type {
   color: #2f3030;
   background-color: transparent;
   line-height: inherit;
+}
+.a-input:not([multiple]){
+  overflow: hidden;
 }
 .a-input,
 .a-input:focus,
