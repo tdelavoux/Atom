@@ -52,7 +52,7 @@ $(
 
     var styles = {
       commun:
-        "font-size:14px;font-weight:bold;padding: 0.7em 1em;border-radius:7px; margin: 0.5em 1em;overflow:hidden;white-space: nowrap; max-width:600px;",
+        "font-size:14px;font-weight:bold;padding: 0.7em 1em;border-radius:7px; margin: 0.5em 1em;overflow:hidden;max-width:600px;",
       success: "background-color:#dff0d8;color:#3c763d;",
       danger: "background-color:#f2dede;color:#a94442;",
       info: "background-color:#d9edf7;color:#31708f;",
