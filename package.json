@@ -1,0 +1,43 @@
+{
+  "name": "atom",
+  "version": "0.0.1",
+  "description": "Small CSS and JS librairies ",
+  "scripts": {
+    "clean": "rm -rvf dist/",
+    "build": "grunt",
+    "build:js": "grunt uglify",
+    "build:css": "grunt sass",
+    "lint-staged": "lint-staged",
+    "format": "prettier --write src/**/*.{js,scss}",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdelavoux/Atom.git"
+  },
+  "keywords": [
+    "css",
+    "javascript",
+    "forms"
+  ],
+  "author": "Thibault Delavoux <thibault.delavoux@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/tdelavoux/Atom/issues"
+  },
+  "homepage": "https://github.com/tdelavoux/Atom#readme",
+  "devDependencies": {
+    "grunt": "^1.5.3",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^5.2.1",
+    "grunt-sass": "^3.1.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.1",
+    "prettier": "^2.6.2",
+    "sass": "^1.52.3"
+  },
+  "lint-staged": {
+    "src/js/*.js": "prettier --write",
+    "src/css/*.scss": "prettier --write"
+  }
+}

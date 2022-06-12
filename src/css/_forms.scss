@@ -1,0 +1,307 @@
+/* -------------------------------------------------------- Radio List -------------------------------------------------------- */
+.a-check {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+.a-check + .a-btn::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 500;
+  content: "f111";
+  margin-right: 0.5em;
+  opacity: 0.6;
+}
+.a-check-iconless + .a-btn::before {
+  content: none;
+}
+.a-check:checked + .a-btn::before {
+  content: "f00c";
+  opacity: 1;
+  font-weight: 900;
+}
+.a-check-iconless:checked + .a-btn::before {
+  content: none;
+}
+
+.a-check:not(:checked):disabled:hover + .a-danger {
+  border: 1px solid var(--p-danger);
+  color: var(--p-danger);
+  background-color: transparent;
+}
+.a-check:not(:checked):disabled:hover + .a-warning {
+  border: 1px solid var(--p-waring);
+  color: var(--p-waring);
+  background-color: transparent;
+}
+.a-check:not(:checked):disabled:hover + .a-primary {
+  border: 1px solid var(--p-primary);
+  color: var(--p-primary);
+  background-color: transparent;
+}
+.a-check:not(:checked):disabled:hover + .a-light {
+  border: 1px solid var(--p-light);
+  color: var(--p-light);
+  background-color: transparent;
+}
+.a-check:not(:checked):disabled:hover + .a-success {
+  border: 1px solid var(--p-sucess);
+  color: var(--p-sucess);
+  background-color: transparent;
+}
+.a-check:not(:checked):disabled:hover + .a-secondary {
+  border: 1px solid var(--p-secondary);
+  color: var(--p-secondary);
+  background-color: transparent;
+}
+.a-check:not(:checked):disabled:hover + .a-info {
+  border: 1px solid var(--p-info);
+  color: var(--p-info);
+  background-color: transparent;
+}
+.a-check:not(:checked):disabled:hover + .a-dark {
+  border: 1px solid var(--t-light);
+  color: var(--t-light);
+  background-color: transparent;
+}
+
+/* -------------------------------------------------------------- Small Files -------------------------------------------------- */
+.a-input-label-file {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 10px;
+  cursor: pointer;
+  padding: 0.5em;
+  margin: 0.5em auto 0 auto;
+  display: block;
+  width: 95%;
+}
+.a-input-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.a-input-file:after {
+  content: "Selectionnez un fichier";
+}
+
+/* -------------------------------------------------------------- Long Files  --------------------------------------------------*/
+.a-uploader {
+  clear: both;
+  margin: 0 auto;
+  min-width: 400px;
+  min-height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.a-uploader .file-bloc,
+.a-uploader label {
+  width: 100%;
+}
+.a-uploader label {
+  float: left;
+  clear: both;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: var(--white);
+  border-radius: 7px;
+  border: 4px dashed var(--ivory);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.a-uploader label:hover {
+  border-color: var(--p-primary);
+}
+.a-uploader .file-start {
+  float: left;
+  clear: both;
+  width: 100%;
+}
+.a-uploader .file-start.hidden {
+  display: none;
+}
+.a-uploader .file-start i.fa,
+.a-uploader .file-start i.fas {
+  font-size: 40px;
+  margin-bottom: 1rem;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.a-uploader .file-bloc-result {
+  clear: both;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1em;
+}
+.a-uploader .file-bloc-result.hidden {
+  display: none;
+}
+.a-uploader .file-bloc-result .file-recap {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.a-uploader input[type="file"] {
+  display: none;
+}
+.a-uploader div {
+  margin: 0 0 0.5rem 0;
+  color: var(--t-light);
+}
+
+/* ------------------- INPUTS --------------------------------------------- */
+.a-form-group label {
+  font-weight: 600;
+}
+.a-input-group {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: 1.7em;
+  font-family: "Roboto", sans-serif;
+  line-height: unset;
+  position: relative !important;
+}
+.a-input-group label:last-of-type {
+  opacity: 0.7;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 0;
+}
+.a-input-group label i {
+  margin: 0 0.5em;
+}
+.a-input:not(:read-only):focus + label:last-of-type,
+select.a-input:focus + label:last-of-type {
+  color: var(--p-primary);
+  opacity: 1;
+  transition: color 0.4s ease;
+  transition: opacity 0.4s ease;
+}
+.a-input {
+  overflow: hidden;
+  border: none;
+  border-bottom: solid 1px var(--medium-border-gray);
+  padding: 7px;
+  font-size: 14px;
+  box-shadow: none;
+  color: #2f3030;
+  background-color: transparent;
+  line-height: inherit;
+}
+.a-input,
+.a-input:focus,
+.a-input:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+input.a-input:disabled,
+input.a-input:read-only,
+select.a-input:disabled {
+  cursor: not-allowed;
+}
+input.a-input:not(:placeholder-shown),
+select.a-input {
+  font-weight: 500;
+}
+.a-input:active,
+.a-input:focus {
+  transition: border-color 0.4s ease;
+  border-color: var(--p-primary);
+  font-weight: 500;
+}
+.a-input::placeholder,
+select.a-input:required:invalid {
+  opacity: 0.6;
+  font-style: italic;
+}
+.a-input:disabled::placeholder,
+.a-input:read-only::placeholder {
+  opacity: 0;
+}
+input.a-input:disabled + label,
+input.a-input:read-only + label,
+select.a-input:disabled + label {
+  opacity: 0.4;
+}
+input.a-input:disabled,
+input.a-input:read-only {
+  border-radius: 5px 5px 0px 0px;
+  border-color: var(--h-light);
+}
+.a-input-group.a-form-error label:last-of-type {
+  color: var(--t-danger);
+  opacity: 1;
+}
+.a-input-group.a-form-error .a-input {
+  border-color: var(--t-danger);
+}
+.a-input-error-text {
+  color: var(--t-danger);
+  position: absolute;
+  bottom: -15px;
+  font-size: 9px;
+  font-weight: normal;
+  right: 15px;
+}
+.a-input-error-text-with-count {
+  color: var(--t-danger);
+  position: absolute;
+  bottom: 20px;
+  font-size: 9px;
+  font-weight: normal;
+  right: 15px;
+}
+.a-input-load::after {
+  font-family: "Font Awesome 6 Free";
+  content: "f2f1";
+  font-weight: 900;
+  opacity: 0.7;
+  right: 8px;
+  bottom: 8px;
+  font-style: normal;
+  position: absolute;
+  display: inline-block;
+  text-decoration: inherit;
+  animation: spinAround 1.1s linear infinite;
+}
+@keyframes spinAround {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.a-borderless {
+  border: none !important;
+}
+.a-input-group .a-input-button {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  opacity: 0.7;
+}
+.a-borderfull {
+  border: solid 1px var(--medium-border-gray);
+  border-radius: 5px;
+}
+input.a-borderfull:read-only,
+input.a-borderfull:disabled {
+  background-color: var(--light-hover-gray);
+}
+
+.a-uploader,
+.a-uploader *,
+.a-input-group {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}

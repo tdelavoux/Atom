@@ -1,0 +1,5 @@
+# Node.js dependencies
+node_modules/
+
+# distributable built files
+dist/
