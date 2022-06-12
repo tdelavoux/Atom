@@ -1,8 +1,5 @@
 # Node.js dependencies
 node_modules/
 
-# intermediate build files
-build/
-
 # distributable built files
 dist/
