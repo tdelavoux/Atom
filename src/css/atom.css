@@ -225,6 +225,7 @@
 .a-panel-collapsable .a-panel-header::after{font-family: 'Font Awesome 6 Free';content: "\f146"; font-weight: 900;opacity:0.6;font-style: normal;display: inline-block;text-decoration: inherit;}
 .a-panel-collapsable .a-panel-header.colapsed::after{font-family: 'Font Awesome 6 Free';content: "\f0fe"; font-weight: 900;opacity:0.6;font-style: normal;display: inline-block;text-decoration: inherit;}
 .a-panel-footer{padding:1em; border:solid 1px var(--light-border-gray); border-top:none;}
+.a-collapsed{display:none;}
 
 /* ------------------- INPUTS --------------------------------------------- */
 .a-form-group label{font-weight:600}

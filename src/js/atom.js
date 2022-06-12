@@ -7,12 +7,12 @@
      const target     = object.attr('collapse-target') 
          ? $(object.attr('collapse-target'))
          : object.next('.a-panel-content'); // By default, use the a-panel-content following the header
-     if(target.hasClass('collapsed') || target.hasClass('a-collapsed')){
+     if(target.hasClass('a-collapsed') || target.hasClass('a-collapsed')){
          target.show(300);
-         target.removeClass('collapsed');
+         target.removeClass('a-collapsed');
          target.removeClass('a-collapsed');
      }else{
-         target.addClass('collapsed');
+         target.addClass('a-collapsed');
          target.hide(300);
      }
  }
@@ -34,17 +34,17 @@
          var target     = $($(this).attr('collapse-target'));
          object.addClass('a-pointer');
          object.on('click', function(){
-             if(object.hasClass('collapsed')){
+             if(object.hasClass('a-collapsed')){
                  object.html(text);
-                 object.removeClass('collapsed');
+                 object.removeClass('a-collapsed');
                  target.show(300);
              }else{
                  options.collapsedText && object.html(options.collapsedText);
-                 object.addClass('collapsed');
+                 object.addClass('a-collapsed');
                  target.hide(300);
              }
          });
-         options.startingPosition === 'collapsed' && object.addClass('collapsed') && target.hide() && (options.collapsedText && object.html(options.collapsedText));
+         options.startingPosition === 'a-collapsed' && object.addClass('a-collapsed') && target.hide() && (options.collapsedText && object.html(options.collapsedText));
          return this;
      };
 
