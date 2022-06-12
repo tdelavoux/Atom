@@ -52,7 +52,7 @@ $(
 
     var styles = {
       commun:
-        "font-size:14px;font-weight:bold;padding: 0.7em 1em;border-radius:7px; margin: 0.5em 1em;overflow:hidden;max-width:600px;",
+        "font-size:14px;font-weight:bold;padding: 0.7em 1em;border-radius:7px; margin: 0.5em 1em 0.5em auto;overflow:hidden;max-width:600px;width:fit-content;align-self:end;pointer-events:fill;cursor: pointer;",
       success: "background-color:#dff0d8;color:#3c763d;",
       danger: "background-color:#f2dede;color:#a94442;",
       info: "background-color:#d9edf7;color:#31708f;",
@@ -67,19 +67,19 @@ $(
     var wrappers = {
       tr: {
         id: "#atomNotify-wrapper-tr",
-        html: '<div id="atomNotify-wrapper-tr" style="position:fixed;top:70px;right:10px;z-index:99999;"></div>',
+        html: '<div id="atomNotify-wrapper-tr" style="position:fixed;top:70px;right:10px;z-index:99999;pointer-events:none;"></div>',
       },
       tl: {
         id: "#atomNotify-wrapper-tl",
-        html: '<div id="atomNotify-wrapper-tl" style="position:fixed;top:70px;left:10px;z-index:99999;"></div>',
+        html: '<div id="atomNotify-wrapper-tl" style="position:fixed;top:70px;left:10px;z-index:99999;pointer-events:none;"></div>',
       },
       bl: {
         id: "#atomNotify-wrapper-bl",
-        html: '<div id="atomNotify-wrapper-bl" style="position:fixed;bottom:30px;left:10px;z-index:99999;"></div>',
+        html: '<div id="atomNotify-wrapper-bl" style="position:fixed;bottom:30px;left:10px;z-index:99999;pointer-events:none;"></div>',
       },
       br: {
         id: "#atomNotify-wrapper-br",
-        html: '<div id="atomNotify-wrapper-br" style="position:fixed;bottom:30px;right:10px;z-index:99999;"></div>',
+        html: '<div id="atomNotify-wrapper-br" style="position:fixed;bottom:30px;right:10px;z-index:99999;pointer-events:none;"></div>',
       },
     };
 
@@ -149,7 +149,7 @@ $(
     };
 
     Notification.prototype.show = function () {
-      this.element.toggle(this.getOption("showAnimationTime")).delay(2000);
+      this.element.slideToggle(this.getOption("showAnimationTime")).delay(2000);
       if (this.getOption("autoHide")) {
         setTimeout(
           () => this.destroy(),
