@@ -1,0 +1,22 @@
+{
+  "name": "atom",
+  "version": "0.0.1",
+  "description": "Small CSS and JS librairies ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdelavoux/Atom.git"
+  },
+  "keywords": [
+    "css",
+    "javascript",
+    "forms"
+  ],
+  "author": "Thibault Delavoux <thibault.delavoux@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/tdelavoux/Atom/issues"
+  },
+  "homepage": "https://github.com/tdelavoux/Atom#readme"
+}
