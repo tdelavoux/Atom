@@ -7,7 +7,10 @@
     "build": "grunt",
     "build:js": "grunt uglify",
     "build:css": "grunt sass",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint-staged": "lint-staged",
+    "format": "prettier --write src/**/*.{js,scss}",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,13 @@
     "grunt": "^1.5.3",
     "grunt-contrib-uglify": "^5.2.1",
     "grunt-sass": "^3.1.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.1",
+    "prettier": "^2.6.2",
     "sass": "^1.52.3"
+  },
+  "lint-staged": {
+    "src/js/*.js": "prettier --write",
+    "src/css/*.scss": "prettier --write"
   }
 }
