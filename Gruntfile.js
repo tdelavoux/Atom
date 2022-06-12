@@ -32,7 +32,7 @@ module.exports = function (grunt) {
 		},
 		build: {
 			files: {
-				"dist/<%= pkg.version %>/css/<%= pkg.name %>.css": "src/css/*.scss"
+				"dist/<%= pkg.version %>/css/<%= pkg.name %>.css": "src/css/main.scss"
 			}
 		}
 	},

@@ -1,0 +1,20 @@
+/* ---------------------- ALERTS --------------------------------------- */
+.a-alert{border: 0;border-radius: .5rem;position: relative;padding: 1.25rem 1.5rem;margin-bottom: 1rem;border: 1px solid transparent}
+.a-alert-primary{color: var(--t-primary);background-color: var(--h-primary); border-left: solid 4px var(--t-primary)}
+.a-alert-secondary{color: var(--t-secondary);background-color: var(--h-secondary);border-left: solid 4px var(--t-secondary)}
+.a-alert-success{color: var(--t-sucess);background-color: var(--h-sucess);border-left: solid 4px var(--t-sucess);}
+.a-alert-light{color: var(--t-light);background-color: var(--h-light);border-left: solid 4px var(--t-light)}
+.a-alert-dark{color: var(--h-light);background-color: var(--t-light);border-left: solid 4px #2f3030}
+.a-alert-warning{color: var(--t-waring);background-color:var(--h-waring);border-left: solid 4px var(--t-waring)}
+.a-alert-danger{color: var(--t-danger);background-color:var(--h-danger);border-left: solid 4px var(--t-danger)}
+.a-alert-info{color: var(--t-info);background-color:var(--h-info);border-left: solid 4px var(--t-info)}
+
+[class*='a-light-']{border:solid 1px var(--h-light);}
+.a-light-primary{color: var(--p-primary);background-color: transparent; border-left: solid 4px var(--h-primary)}
+.a-light-secondary{color: var(--p-secondary);background-color: transparent;border-left: solid 4px var(--h-secondary)}
+.a-light-success{color: var(--p-sucess);background-color: transparent;border-left: solid 4px var(--h-sucess);}
+.a-light-light{color: var(--p-light);background-color:transparent;border-left: solid 4px var(--h-light)}
+.a-light-dark{color: var(--p-light);background-color: transparent;border-left: solid 4px #2f3030}
+.a-light-warning{color: var(--p-waring);background-color:transparent;border-left: solid 4px var(--h-waring)}
+.a-light-danger{color: var(--p-danger);background-color:transparent;border-left: solid 4px var(--h-danger)}
+.a-light-info{color: var(--p-info);background-color:transparent;border-left: solid 4px var(--h-info)}
