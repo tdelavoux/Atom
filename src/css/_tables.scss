@@ -1,21 +1,21 @@
 /* ------------------- TABLES  -----------------------------------------------*/
 .a-table {
-	width: 100%;
-	margin: 1em 0;
-	border-spacing: 0;
-	border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  border-spacing: 0;
+  border-collapse: collapse;
 }
 .a-table > tbody > tr > td,
 .a-table > tbody > tr > th,
 .a-table > thead > tr > th,
 .a-table > thead > tr > td {
-	padding: 0.9em;
+  padding: 0.9em;
 }
 .a-table > tbody > tr {
-	border-bottom: solid 1px var(--light-border-gray);
+  border-bottom: solid 1px var(--light-border-gray);
 }
 .a-table thead {
-	border-bottom: solid 2px var(--medium-border-gray);
+  border-bottom: solid 2px var(--medium-border-gray);
 }
 .a-table .a-table-header-dark,
 .a-table .a-table-header-primary,
@@ -25,78 +25,78 @@
 .a-table .a-table-header-warning,
 .a-table .a-table-header-info,
 .a-table .a-table-header-light {
-	border-bottom: none;
+  border-bottom: none;
 }
 .a-thead-center > tr > *,
 .a-body-center > tr > * {
-	text-align: center;
+  text-align: center;
 }
 
 .a-table-hover > tbody > tr:hover {
-	background-color: var(--light-hover-gray);
+  background-color: var(--light-hover-gray);
 }
 .a-table-stripped > tbody > tr:nth-child(even) {
-	background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 .a-table-delimited th,
 .a-table-delimited td {
-	border: solid 1px var(--light-border-gray);
+  border: solid 1px var(--light-border-gray);
 }
 .a-table-delimited thead {
-	border: unset;
+  border: unset;
 }
 
 .a-table-header-dark tr th {
-	color: var(--white);
-	background-color: var(--t-light);
+  color: var(--white);
+  background-color: var(--t-light);
 }
 .a-table-header-primary > tr > th {
-	color: var(--t-primary);
-	background-color: var(--h-primary);
+  color: var(--t-primary);
+  background-color: var(--h-primary);
 }
 .a-table-header-secondary > tr > th {
-	color: var(--t-secondary);
-	background-color: var(--h-secondary);
+  color: var(--t-secondary);
+  background-color: var(--h-secondary);
 }
 .a-table-header-success > tr > th {
-	color: var(--t-sucess);
-	background-color: var(--h-sucess);
+  color: var(--t-sucess);
+  background-color: var(--h-sucess);
 }
 .a-table-header-danger > tr > th {
-	color: var(--t-danger);
-	background-color: var(--h-danger);
+  color: var(--t-danger);
+  background-color: var(--h-danger);
 }
 .a-table-header-warning > tr > th {
-	color: var(--t-waring);
-	background-color: var(--h-waring);
+  color: var(--t-waring);
+  background-color: var(--h-waring);
 }
 .a-table-header-info > tr > th {
-	color: var(--t-info);
-	background-color: var(--h-info);
+  color: var(--t-info);
+  background-color: var(--h-info);
 }
 .a-table-header-light > tr > th {
-	color: var(--t-light);
-	background-color: var(--h-light);
+  color: var(--t-light);
+  background-color: var(--h-light);
 }
 .a-table th {
-	text-align: left;
+  text-align: left;
 }
 
 .a-table-sticky > tr > th,
 .a-table-sticky > tr > td {
-	position: sticky;
-	top: 0px;
-	z-index: 100;
+  position: sticky;
+  top: 0px;
+  z-index: 100;
 }
 
 /* ------------------------------- DataTable --------------------------------------------------------------------------------- */
 .a-paginate-btn {
-	margin: 0 3px;
+  margin: 0 3px;
 }
 .a-paginate-line {
-	padding: 10px 0;
-	border: none !important;
+  padding: 10px 0;
+  border: none !important;
 }
 .a-hide {
-	display: none;
+  display: none;
 }
