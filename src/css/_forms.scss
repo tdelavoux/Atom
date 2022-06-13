@@ -7,7 +7,7 @@
 .a-check + .a-btn::before {
   font-family: "Font Awesome 6 Free";
   font-weight: 500;
-  content: "f111";
+  content: "\f111";
   margin-right: 0.5em;
   opacity: 0.6;
 }
@@ -15,7 +15,7 @@
   content: none;
 }
 .a-check:checked + .a-btn::before {
-  content: "f00c";
+  content: "\f00c";
   opacity: 1;
   font-weight: 900;
 }
@@ -196,7 +196,7 @@ select.a-input:focus + label:last-of-type {
   background-color: transparent;
   line-height: inherit;
 }
-.a-input:not([multiple]){
+.a-input:not([multiple]) {
   overflow: hidden;
 }
 .a-input,
@@ -264,7 +264,7 @@ input.a-input:read-only {
 }
 .a-input-load::after {
   font-family: "Font Awesome 6 Free";
-  content: "f2f1";
+  content: "\f2f1";
   font-weight: 900;
   opacity: 0.7;
   right: 8px;
