@@ -56,54 +56,92 @@
 
 /* ----------------------------------------- POSITIONS ---------------------------------------------------------------------- */
 .center {
-  text-align: center;
+  text-align: center
 }
-.left {
-  text-align: left;
+.ta-r {
+  text-align: right
 }
-.right {
-  text-align: right;
+.ta-l {
+  text-align: left
 }
 .flex {
-  display: flex;
-}
-.ai-c {
-  align-items: center;
-}
-.jc-c {
-  justify-content: center;
-}
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex
 }
 .flex-column {
   display: flex;
-  flex-direction: column;
+  flex-direction: column
 }
-.ar {
-  text-align: right;
+.ai-c {
+  align-items: center
 }
-.al {
-  text-align: left;
+.ai-fs {
+  align-items:flex-start
 }
-.sb {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.ai-sb {
+  align-items: space-between
+}
+.ai-fe {
+  align-items:flex-end
+}
+.ai-st {
+  align-items:stretch
+}
+.jc-c {
+  justify-content: center
+}
+.jc-sb {
+  justify-content: space-between
+}
+.jc-fs {
+  justify-content: flex-start
+}
+.jc-fe {
+  justify-content: flex-end
+}
+.jc-st {
+  justify-content: stretch
+}
+.jc-sb {
+  justify-content: space-between
+}
+.jc-sa {
+  justify-content: space-around
+}
+.jc-se {
+  justify-content: space-evenly
+}
+.ac-fs{
+  align-content: flex-start
+}
+.ac-fe{
+  align-content: flex-end
+}
+.ac-c{
+  align-content: center
+}
+.ac-st{
+  align-content: stretch
+}
+.ac-sb{
+  align-content: space-between
+}
+.ac-sa{
+  align-content: space-around
+}
+.fw-w{
+  flex-wrap: wrap
+}
+.fw-wr{
+  flex-wrap:wrap-reverse
+}
+.fw-no{
+  flex-wrap: nowrap
 }
 .flex-1 {
-  flex: 1000 10 auto !important;
+  flex: 1000 10 auto !important
 }
 .a-round {
   border-radius: 50%;
-}
-.a-container {
-  margin: 0 auto;
-  @media (min-width: 1200px) {
-    width: 1170px;
-  }
 }
 .fw-500 {
   font-weight: 500;
