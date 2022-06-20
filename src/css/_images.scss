@@ -1,39 +1,27 @@
 /* ------------------------------------------------------------- IMG Round ---------------------------------------------------- */
-.a-round-img-xl {
+.a-round-img, .a-round-img-xl, .a-round-img-sm, .a-round-img-xs{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 50%;
+  margin: 0.5em;
+}
+.a-round-img-xl {
   width: 90px;
   height: 90px;
-  margin: 0.5em;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+
 }
 .a-round-img {
-  border-radius: 50%;
   width: 65px;
   height: 65px;
-  margin: 0.5em;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 .a-round-img-sm {
-  border-radius: 50%;
   width: 40px;
   height: 40px;
   margin: 0em 0.3em;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
 }
 .a-round-img-xs {
-  border-radius: 50%;
   width: 30px;
   height: 30px;
   margin: 0em 0.3em;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
 }

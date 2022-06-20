@@ -17,15 +17,9 @@
 .a-table thead {
   border-bottom: solid 2px var(--medium-border-gray);
 }
-.a-table .a-table-header-dark,
-.a-table .a-table-header-primary,
-.a-table .a-table-header-secondary,
-.a-table .a-table-header-success,
-.a-table .a-table-header-danger,
-.a-table .a-table-header-warning,
-.a-table .a-table-header-info,
-.a-table .a-table-header-light {
-  border-bottom: none;
+.a-table :where(.a-table-header-primary, .a-table-header-dark, .a-table-header-secondary, .a-table-header-success, 
+.a-table-header-danger, .a-table-header-warning, .a-table-header-info, .a-table-header-light) {
+  border-bottom: none !important;
 }
 .a-thead-center > tr > *,
 .a-body-center > tr > * {
@@ -38,8 +32,7 @@
 .a-table-stripped > tbody > tr:nth-child(even) {
   background-color: #eeeeee;
 }
-.a-table-delimited th,
-.a-table-delimited td {
+.a-table-delimited :where(th, td) {
   border: solid 1px var(--light-border-gray);
 }
 .a-table-delimited thead {
