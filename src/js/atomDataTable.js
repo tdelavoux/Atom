@@ -384,11 +384,12 @@
           });
         }
 
-        var nbPages = parseInt(rows.length / options.nbPerPage) + 1;
+        var nbPages = parseInt(rows.length / options.nbPerPage);
+        if(parseInt(rows.length)%parseInt(options.nbPerPage) != 0){nbPages++;}
         var colspan = table
-          .children("tbody")
+          .children("thead")
           .children("tr:first-child")
-          .children("td").length;
+          .children().length;
         table.append(
           '<tfoot><tr><td class="center a-paginate-line" colspan="' +
             colspan +
@@ -457,8 +458,8 @@
       }
 
       /**
-       * Display buttons for change of pages
-       * if maxBtn is null, then the number of max buttons stay the same as before
+       * Display buttons for change of pages.
+       * If maxBtn is null, then the number of max buttons stay the same as before
        *
        */
       function displayPagesBtn(maxBtn) {
@@ -477,10 +478,9 @@
 
         var currPage = parseInt(table.attr("data-page"));
 
-        // TODO conflits sur tables multiples
-        if (!$(".a-paginate-btn.a-active").is(":visible")) {
-          $(".a-paginate-btn.a-active").removeClass("a-active");
-          $(".a-paginate-btn:first").addClass("a-active");
+        if (!table.find(".a-paginate-btn.a-active").is(":visible")) {
+          table.find(".a-paginate-btn.a-active").removeClass("a-active");
+          table.find(".a-paginate-btn:first").addClass("a-active");
         }
 
         var btns = table.children("tfoot").children().children().children();
