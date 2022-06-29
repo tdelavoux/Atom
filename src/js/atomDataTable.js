@@ -385,7 +385,9 @@
         }
 
         var nbPages = parseInt(rows.length / options.nbPerPage);
-        if(parseInt(rows.length)%parseInt(options.nbPerPage) != 0){nbPages++;}
+        if (parseInt(rows.length) % parseInt(options.nbPerPage) != 0) {
+          nbPages++;
+        }
         var colspan = table
           .children("thead")
           .children("tr:first-child")

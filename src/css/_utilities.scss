@@ -56,89 +56,89 @@
 
 /* ----------------------------------------- POSITIONS ---------------------------------------------------------------------- */
 .center {
-  text-align: center
+  text-align: center;
 }
 .ta-r {
-  text-align: right
+  text-align: right;
 }
 .ta-l {
-  text-align: left
+  text-align: left;
 }
 .flex {
-  display: flex
+  display: flex;
 }
 .flex-column {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 .ai-c {
-  align-items: center
+  align-items: center;
 }
 .ai-fs {
-  align-items:flex-start
+  align-items: flex-start;
 }
 .ai-sb {
-  align-items: space-between
+  align-items: space-between;
 }
 .ai-fe {
-  align-items:flex-end
+  align-items: flex-end;
 }
 .ai-st {
-  align-items:stretch
+  align-items: stretch;
 }
 .jc-c {
-  justify-content: center
+  justify-content: center;
 }
 .jc-sb {
-  justify-content: space-between
+  justify-content: space-between;
 }
 .jc-fs {
-  justify-content: flex-start
+  justify-content: flex-start;
 }
 .jc-fe {
-  justify-content: flex-end
+  justify-content: flex-end;
 }
 .jc-st {
-  justify-content: stretch
+  justify-content: stretch;
 }
 .jc-sb {
-  justify-content: space-between
+  justify-content: space-between;
 }
 .jc-sa {
-  justify-content: space-around
+  justify-content: space-around;
 }
 .jc-se {
-  justify-content: space-evenly
+  justify-content: space-evenly;
 }
-.ac-fs{
-  align-content: flex-start
+.ac-fs {
+  align-content: flex-start;
 }
-.ac-fe{
-  align-content: flex-end
+.ac-fe {
+  align-content: flex-end;
 }
-.ac-c{
-  align-content: center
+.ac-c {
+  align-content: center;
 }
-.ac-st{
-  align-content: stretch
+.ac-st {
+  align-content: stretch;
 }
-.ac-sb{
-  align-content: space-between
+.ac-sb {
+  align-content: space-between;
 }
-.ac-sa{
-  align-content: space-around
+.ac-sa {
+  align-content: space-around;
 }
-.fw-w{
-  flex-wrap: wrap
+.fw-w {
+  flex-wrap: wrap;
 }
-.fw-wr{
-  flex-wrap:wrap-reverse
+.fw-wr {
+  flex-wrap: wrap-reverse;
 }
-.fw-no{
-  flex-wrap: nowrap
+.fw-no {
+  flex-wrap: nowrap;
 }
 .flex-1 {
-  flex: 1000 10 auto !important
+  flex: 1000 10 auto !important;
 }
 .a-round {
   border-radius: 50%;
