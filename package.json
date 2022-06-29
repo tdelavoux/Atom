@@ -1,6 +1,6 @@
 {
   "name": "atom",
-  "version": "0.1.0-dev",
+  "version": "0.1.0",
   "description": "Small CSS and JS librairies ",
   "scripts": {
     "clean": "rm -rvf dist/",
