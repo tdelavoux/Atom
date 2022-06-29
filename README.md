@@ -27,10 +27,10 @@ Create a new release by following these 4 steps:
    - Remove `-dev` from the `version` in `package.json`
    - Run `npm install --package-lock-only` to update the version in `package-lock.json`
    - Run `npm run build` to build the version locally
-   - Commit `git commit --message="chore: release vX.X.X"` with the two files changed
+   - Commit `git add package*.json && git commit --message="chore: release vX.X.X"` with the two files changed
 2. Create a tag `git tag vX.X.X`
 3. Bump the next dev version
    - Bump the `version` in `package.json`, with the `-dev` suffix
    - Run `npm install --package-lock-only` to update the version in `package-lock.json`
-   - Commit `git commit --message="chore: bump version to vX.X.X"` with the two file changed
+   - Commit `git add package*.json && git commit --message="chore: bump version to vX.X.X-dev"` with the two file changed
 4. Push them on the remote: `git push && git push --tags`
