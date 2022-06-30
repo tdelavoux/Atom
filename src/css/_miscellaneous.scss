@@ -76,3 +76,9 @@
   background-color: var(--white);
   border-radius: 5px;
 }
+
+/* ---------------------------------------- COLLAPSE ------------------------------------------------------------------- */
+.a-collapsed {
+  max-height: 0;
+  overflow: hidden;
+}

@@ -1,63 +1,59 @@
-$(document.body).on("click", ".a-collapsable", function () {
-  const object = $(this);
-  const target = object.attr("collapse-target")
-    ? $(object.attr("collapse-target"))
-    : object.next(".a-panel-content"); // By default, use the a-panel-content following the header
-  if (target.hasClass("collapsed") || target.hasClass("a-collapsed")) {
-    target.show(300);
-    target.removeClass("collapsed");
-    target.removeClass("a-collapsed");
-  } else {
-    target.addClass("collapsed");
-    target.hide(300);
+document.body.addEventListener("click", function (e) {
+  var t = e.target;
+  if (t && t.classList.contains("a-collapsable")) {
+    var content =
+      document.getElementById(t.getAttribute("collapse-target")) ??
+      t.nextElementSibling;
+    content
+      ? a_toggle(content)
+      : console.warn("AtomPanTab : No content found for this collapsable");
   }
 });
 
-(function ($) {
-  $.fn.atomCollapse = function (customOptions) {
-    this.initialize = function (customOptions) {
-      var options = {
-        collapsedText: null,
-        startingPosition: null,
-      };
-      $.extend(options, customOptions);
-
-      var object = $(this);
-      var text = object.html();
-      var target = $($(this).attr("collapse-target"));
-      object.addClass("a-pointer");
-      object.on("click", function () {
-        if (object.hasClass("collapsed")) {
-          object.html(text);
-          object.removeClass("collapsed");
-          target.show(300);
-        } else {
-          options.collapsedText && object.html(options.collapsedText);
-          object.addClass("collapsed");
-          target.hide(300);
-        }
-      });
-      options.startingPosition === "collapsed" &&
-        object.addClass("collapsed") &&
-        target.hide() &&
-        options.collapsedText &&
-        object.html(options.collapsedText);
-      return this;
-    };
-
-    this.destroy = function () {
-      this.unbind();
+class AtomCollapse {
+  constructor(el, customOptions) {
+    if (!(el instanceof HTMLElement)) {
+      console.warn("AtomCollapse: Element is not a valid HTMLElement");
       return null;
-    };
-
-    if (this.length > 1) {
-      var collection = [];
-      this.each(function () {
-        collection.push($(this).atomCollapse(customOptions));
-      });
-      return collection;
-    } else {
-      return this.initialize(customOptions);
     }
-  };
-})(jQuery);
+
+    this.options = {
+      collapsedText: null,
+      startingPosition: null,
+      collapseSpeed: 0.4,
+    };
+    $.extend(this.options, customOptions);
+
+    this.innerText = el.innerHTML;
+    this.target =
+      document.getElementById(el.getAttribute("collapse-target")) ??
+      el.nextElementSibling;
+
+    if (!this.target instanceof HTMLElement) {
+      console.warn("AtomCollapse: Target element is not a valid HTMLElement");
+      return null;
+    }
+
+    el.classList.add("a-pointer");
+    this.options.startingPosition === "collapsed" &&
+      this.target.classList.add("a-collapsed");
+
+    let obj = this;
+    el.addEventListener("click", obj.collapse_toggle.bind(obj));
+  }
+
+  collapse_toggle() {
+    a_toggle(
+      this.target,
+      a_isNumeric(this.options.collapseSpeed) ? this.options.collapseSpeed : 0.4
+    );
+  }
+
+  setCollapsedText(text) {
+    this.options.collapsedText = text;
+  }
+
+  setcollapseSpeed(speed) {
+    this.options.collapseSpeed = speed;
+  }
+}
