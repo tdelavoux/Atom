@@ -103,19 +103,21 @@ async function compute(form, self) {
     var displayMsg     = !item.hasAttribute("a-disable-message");
     var nullable       = item.hasAttribute("a-nullable");
     var alternateVerif = item.getAttribute("a-alternate-verif");
+    var numericOnly    = item.hasAttribute("a-numeric-only");
 
     var errCustomMsg = item.getAttribute("a-error-message") ?? "Champ incorrect";
+    var errorNumeric = "Caractères numeriques uniquement";
     var error        = "Saisie obligatoire";
     var errorInf     = `Saisie trop courte (min ${minLength} caractères)`;
     var errorOver    = `Saisie trop longue (max ${maxLength} caractères)`;
 
-    var isEmpty = !nullable && item.value.trim() === E_S;
-    var inf     = item.value.trim().length < minLength;
-    var over    = maxLength !== null && item.value.trim().length > maxLength;
-    if ((checkInvisible || a_isVisible(item)) && (isEmpty || inf || over || eval(alternateVerif))) {
-      blocage = a_form_handler_error(item, colorInput, displayMsg, err, (isEmpty ? error : inf ? errorInf : over ? errorOver : errCustomMsg), name);
+    var isEmpty     = !nullable && item.value.trim() === E_S;
+    var isNan       = numericOnly && !a_isNumeric(item.value.trim());
+    var inf         = item.value.trim().length < minLength;
+    var over        = maxLength !== null && item.value.trim().length > maxLength;
+    if ((checkInvisible || a_isVisible(item)) && (isEmpty || isNan || inf || over || eval(alternateVerif))) {
+        blocage = a_form_handler_error(item, colorInput, displayMsg, err, (isEmpty ? error : isNan ? errorNumeric : inf ? errorInf : over ? errorOver : errCustomMsg), name);
     }
-
   });
 
   /**
