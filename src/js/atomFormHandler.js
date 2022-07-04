@@ -165,40 +165,47 @@ async function compute(form, self) {
    * @use optional  a-disable-message: Permet de désactiver l'affichage des message sous les champs input
    */
   form.querySelectorAll('.a-verify-date').forEach(item => {
-
+    
     var name           = item.getAttribute("a-name") ?? "Date";
     var displayMsg     = !item.hasAttribute("a-disable-message");
     var nullable       = item.hasAttribute("a-nullable");
     var alternateVerif = item.getAttribute("a-alternate-verif");
-    var format         = item.getAttribute("a-date-format") ?? "DD/MM/YYYY";
+    var format         = item.getAttribute("a-date-format") ?? "d/m/Y";
+
+    var regex     = new RegExp("^([d|m|y|Y|h|H|i|s|-| |:|\/]*)$");
+    if(!regex.test(format.trim())){console.warn(`AtomFormHandler: ${format} n'est pas un format valide. Intitialisation a la valeur par défaut d/m/Y`); format = "d/m/Y";}
 
     var errCustomMsg = item.getAttribute("a-error-message") ?? "Champ incorrect";
     var error        = "Saisie obligatoire";
-    var errorFormat  = `Format invalide. Attendu : ${format.toUpperCase()}`;
+    var errorFormat  = `Format invalide. Attendu : ${format}`;
 
-    // TODO protect regex format 
     // Formatage de la REGEX a partir du format
-    var regFormat = format.toUpperCase().replace(new RegExp("/", "g"), "([\\/])");
-    var regFormat = regFormat.replace(new RegExp("-", "g"), "([-])");
-    var regFormat = regFormat.replace(
-      new RegExp("DD", "g"),
-      "(0?[1-9]|[12][0-9]|3[01])"
-    );
-    var regFormat = regFormat.replace(
-      new RegExp("MM", "g"),
-      "(0?[1-9]|1[0-2])"
-    );
-    var regFormat = regFormat.replace(new RegExp("YYYY", "g"), "([0-9]{4})");
-    var regFormat = regFormat.replace(new RegExp("YY", "g"), "([0-9]{2})");
+    var rules = {
+        "/":"([\\/])",
+        " ":"([ ])",
+        "-":"([-])",
+        ":":"([:])",
+        "d":"(0?[1-9]|[12][0-9]|3[01])",
+        "m":"(0?[1-9]|1[0-2])",
+        "Y":"([0-9]{4})",
+        "y":"([0-9]{2})",
+        "h":"(0?[0-9]|1[0-1])",
+        "H":"(0?[0-9]|1?[0-9]|2[0-3])",
+        "i":"(0?[0-9]|[1-5][0-9])",
+        "s":"(0?[0-9]|[1-5][0-9])"
+    };
+    var regFormat = format;
+    for (const [key, value] of Object.entries(rules)) {
+        var regFormat = regFormat.replace(new RegExp(key, "g"), value);
+    }
     var regFormat = regFormat + "$";
     var regex     = new RegExp("^" + regFormat);
 
     var isEmpty   = !nullable && item.value.trim() === E_S;
     var unmatched = !regex.test(item.value.trim());
     if ((checkInvisible || a_isVisible(item)) && (isEmpty || unmatched || eval(alternateVerif))) {
-      blocage = a_form_handler_error(item, colorInput, displayMsg, err, (isEmpty ? error : unmatched ? errorFormat : errCustomMsg), name);
+        blocage = a_form_handler_error(item, colorInput, displayMsg, err, (isEmpty ? error : unmatched ? errorFormat : errCustomMsg), name);
     }
-
   });
 
   /**
