@@ -198,9 +198,7 @@ async function compute(form, self) {
     for (const [key, value] of Object.entries(rules)) {
         var regFormat = regFormat.replace(new RegExp(key, "g"), value);
     }
-    var regFormat = regFormat + "$";
-    var regex     = new RegExp("^" + regFormat);
-
+    var regex     = new RegExp(`^${regFormat$}$`);
     var isEmpty   = !nullable && item.value.trim() === E_S;
     var unmatched = !regex.test(item.value.trim());
     if ((checkInvisible || a_isVisible(item)) && (isEmpty || unmatched || eval(alternateVerif))) {
