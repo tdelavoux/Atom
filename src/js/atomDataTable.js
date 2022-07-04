@@ -54,7 +54,7 @@
 
       function addInputShuffleField() {
         var searchField =
-          '<div class="ar"><i class="fas fa-search"></i><input id="atom-search-' +
+          '<div class="ta-r"><i class="fas fa-search"></i><input id="atom-search-' +
           tableid +
           '" class="a-input a-table-filter ' +
           options.inputBorder +
@@ -385,9 +385,7 @@
         }
 
         var nbPages = parseInt(rows.length / options.nbPerPage);
-        if (parseInt(rows.length) % parseInt(options.nbPerPage) != 0) {
-          nbPages++;
-        }
+        if(parseInt(rows.length)%parseInt(options.nbPerPage) != 0){nbPages++;}
         var colspan = table
           .children("thead")
           .children("tr:first-child")
