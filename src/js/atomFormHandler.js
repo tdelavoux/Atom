@@ -218,30 +218,48 @@ async function compute(form, self) {
    *
    */
   form.querySelectorAll('.a-verify-phone').forEach(item => {
- 
+            
     var name           = item.getAttribute("a-name") ?? "Telephone";
     var displayMsg     = !item.hasAttribute("a-disable-message");
     var nullable       = item.hasAttribute("a-nullable");
     var alternateVerif = item.getAttribute("a-alternate-verif");
-    var format         = item.getAttribute("a-phone-format") ?? "XX.XX.XX.XX.XX";
+    var format         = item.getAttribute("a-phone-format") ?? "XXXXXXXXXX";
+    var regex     = new RegExp("^([0|1|2|3|4|5|6|7|8|9|X|-| |+|:|.|\/]*)$");
+    if(!regex.test(format.trim())){console.warn(`AtomFormHandler: ${format} n'est pas un format valide. Intitialisation a la valeur par défaut XXXXXXXXXX`); format = "XXXXXXXXXX";}
 
     var errCustomMsg = item.getAttribute("a-error-message") ?? "Champ incorrect";
     var error        = "Saisie obligatoire";
     var errorFormat  = `Format invalide. Attendu : ${format.toUpperCase()}`;
 
-    // TODO protect regex format 
-    // Formatage de la REGEX a partir du format
-    var regFormat = format.toUpperCase().replace(new RegExp("/", "g"), "([\\/])");
-    var regFormat = regFormat.replace(new RegExp("-", "g"), "([-])");
-    var regFormat = regFormat.replace(new RegExp("\\+", "g"), "([+])");
-    var regFormat = regFormat.replace(new RegExp("X", "g"),"([0-9])");
-    var regFormat = regFormat + "$";
-    var regex     = new RegExp("^" + regFormat);
+    var rules = {
+        "/":"([\\/])",
+        "0":"([0])",
+        "1":"([1])",
+        "2":"([2])",
+        "3":"([3])",
+        "4":"([4])",
+        "5":"([5])",
+        "6":"([6])",
+        "7":"([7])",
+        "8":"([8])",
+        "9":"([9])",
+        " ":"([ ])",
+        "\\.":"([.])",
+        "-":"([-])",
+        ":":"([:])",
+        "\\+":"([+])",
+        "X":"([0-9])"
+    };
 
+    var regFormat = format;
+    for (const [key, value] of Object.entries(rules)) {
+        var regFormat = regFormat.replace(new RegExp(key, "g"), value);
+    }
+    var regex     = new RegExp(`^${regFormat}$`);
     var isEmpty   = !nullable && item.value.trim() === E_S;
-    var unmatched = !regex.test(item.value.trim());
+    var unmatched = !regex.test(item.value);
     if ((checkInvisible || a_isVisible(item)) && (isEmpty || unmatched || eval(alternateVerif))) {
-      blocage = a_form_handler_error(item, colorInput, displayMsg, err, (isEmpty ? error : unmatched ? errorFormat : errCustomMsg), name);
+        blocage = a_form_handler_error(item, colorInput, displayMsg, err, (isEmpty ? error : unmatched ? errorFormat : errCustomMsg), name);
     }
 
   });
