@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script can be used to build all the tagged version in `dist/x.x.x/`
+
 INITIAL_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 for TAG in $(git tag --list); do
