@@ -29,8 +29,8 @@
   background-color: transparent;
 }
 .a-check:not(:checked):disabled:hover + .a-warning {
-  border: 1px solid var(--p-waring);
-  color: var(--p-waring);
+  border: 1px solid var(--p-warning);
+  color: var(--p-warning);
   background-color: transparent;
 }
 .a-check:not(:checked):disabled:hover + .a-primary {

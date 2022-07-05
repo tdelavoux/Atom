@@ -32,8 +32,8 @@
   color: var(--t-danger);
 }
 .a-panel.a-panel-warning .a-panel-header {
-  background-color: var(--h-waring);
-  color: var(--t-waring);
+  background-color: var(--h-warning);
+  color: var(--t-warning);
 }
 .a-panel.a-panel-info .a-panel-header {
   background-color: var(--h-info);
@@ -116,7 +116,7 @@
   color: var(--p-sucess);
 }
 .a-tab-warning .atom-pan-tab-header-item.active {
-  color: var(--p-waring);
+  color: var(--p-warning);
 }
 .a-tab-danger .atom-pan-tab-header-item.active {
   color: var(--p-danger);
@@ -141,7 +141,7 @@
   background-color: var(--p-sucess);
 }
 .a-tab-warning {
-  background-color: var(--p-waring);
+  background-color: var(--p-warning);
 }
 .a-tab-danger {
   background-color: var(--p-danger);

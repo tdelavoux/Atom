@@ -78,16 +78,16 @@
   color: var(--white);
 }
 .a-warning {
-  border: 1px solid var(--p-waring);
-  color: var(--p-waring);
+  border: 1px solid var(--p-warning);
+  color: var(--p-warning);
 }
 .a-warning:focus,
 .a-warning:active,
 .a-warning:not(:disabled):hover,
 .a-check:checked + .a-warning,
 .a-warning.a-active {
-  background-color: var(--p-waring);
-  border: 1px solid var(--p-waring);
+  background-color: var(--p-warning);
+  border: 1px solid var(--p-warning);
   color: var(--white);
 }
 .a-light {
@@ -164,9 +164,9 @@
 }
 .a-full-warning,
 .a-full-warning:hover {
-  border: 1px solid var(--p-waring);
+  border: 1px solid var(--p-warning);
   color: var(--white);
-  background-color: var(--p-waring);
+  background-color: var(--p-warning);
   text-decoration: none;
 }
 .a-full-primary,
@@ -244,9 +244,9 @@
 }
 .a-half-warning,
 .a-half-warning:hover {
-  border: 1px solid var(--h-waring);
-  color: var(--t-waring);
-  background-color: var(--h-waring);
+  border: 1px solid var(--h-warning);
+  color: var(--t-warning);
+  background-color: var(--h-warning);
 }
 .a-half-danger,
 .a-half-danger:hover {
@@ -282,7 +282,7 @@
 }
 .a-link-warning,
 .a-link-warning:hover {
-  color: var(--t-waring);
+  color: var(--t-warning);
   border: none;
 }
 .a-link-danger,
