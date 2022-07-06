@@ -1,190 +1,160 @@
-$(
-  (function (factory) {
-    if (typeof define === "function" && define.amd) {
-      define(["jquery"], factory);
-    } else if (typeof module === "object" && module.exports) {
-      // Node/CommonJS
-      module.exports = function (root, jQuery) {
-        if (jQuery === undefined) {
-          if (typeof window !== "undefined") {
-            jQuery = require("jquery");
-          } else {
-            jQuery = require("jquery")(root);
-          }
-        }
-        factory(jQuery);
-        return jQuery;
+class AtomNotificationWraper{
+  static globalAlignments = {
+      tr : {
+          top  : '70px',
+          right: '10px'
+      },
+      tl : {
+          top : '70px',
+          left: '10px'
+      },
+      bl : {
+          bottom: '30px',
+          left  : '10px'
+      },
+      br : {
+          bottom: '30px',
+          right : '10px'
+      }
+  }
+  static wrappers = {
+      id   : "atomNotify-wrapper-",
+      style: "position:fixed;z-index:99999;pointer-events:none;",
+  };
+  constructor(position){
+      const wrapper = document.createElement("div");
+      wrapper.setAttribute('id', AtomNotificationWraper.wrappers.id + position);
+      wrapper.style.cssText = AtomNotificationWraper.wrappers.style;
+      for (const [key, value] of Object.entries(AtomNotificationWraper.globalAlignments[position])) {
+          wrapper.style[key] = value;
+      } 
+      document.body.appendChild(wrapper);
+      this.element = wrapper;
+  }
+  static getWrapper(position){
+      var    key          = position in AtomNotificationWraper.globalAlignments ? position : 'tr';
+      return this.element = document.getElementById(this.wrappers.id + key) ?? new this(key);
+  }
+  static setGlobalConfig(config) { // TODO gérer les conflits de types
+      this.globalConfig = {
+          ...this.globalConfig,
+          ...config,
       };
-    } else {
-      // Browser globals
-      factory(jQuery);
-    }
-  })(function ($) {
-    const pluginName = "atomNotification";
+  }
+}
 
-    var pluginOptions = {
-      clickToHide: true,
-      autoHide: true,
-      autoHideDelay: 7000,
-      alignment: "top right",
-      type: "success",
-      showAnimationTime: 450,
-      hideAnimationDuration: 200,
-      maxElements: 5, // TODO gérer le cas
-    };
+// TODO gerer l'html dans le contenu
+class AtomNotification {
 
-    const acceptedAlignment = [
-      "top left",
-      "top right",
-      "bottom left",
-      "bottom right",
-    ];
-    const acceptedTypes = [
-      "success",
-      "danger",
-      "info",
-      "warning",
-      "light",
-      "dark",
-      "primary",
-      "secondary",
-    ];
+  static globalConfig = {
+      clickToHide          : true,
+      autoHide             : true,
+      autoHideDelay        : 15000,
+      alignment            : "tr",
+      type                 : "success",
+      showAnimationTime    : 450,
+      hideAnimationDuration: 500,
+      htmlEnable           : true,
+      maxElements          : 5,           // TODO gérer le cas
+  };
+  static wrappers          = {}
+  static acceptedAlignment = ["tl","tr","bl","br"];
+  static acceptedTypes     = ["success","danger","info","warning","light","dark","primary","secondary"];
+  static styles            = {
+      commun   : "font-size:14px;font-weight:bold;padding: 0.7em 1em;border-radius:7px; margin: 0.5em 1em 0.5em auto;overflow:hidden;max-width:600px;width:fit-content;align-self:end;pointer-events:fill;cursor: pointer;",
+      success  : ["a-text-success", "a-h-success"],
+      danger   : ["a-text-danger", "a-h-danger"],
+      info     : ["a-text-info", "a-h-info"],
+      light    : ["a-text-light", "a-h-light"],
+      warning  : ["a-text-warning", "a-h-warning"],
+      dark     : ["a-text-dark", "a-h-dark"],
+      primary  : ["a-text-primary", "a-h-primary"],
+      secondary: ["a-text-secondary", "a-h-secondary"]
+  };
 
-    var styles = {
-      commun:
-        "font-size:14px;font-weight:bold;padding: 0.7em 1em;border-radius:7px; margin: 0.5em 1em 0.5em auto;overflow:hidden;max-width:600px;width:fit-content;align-self:end;pointer-events:fill;cursor: pointer;",
-      success: "background-color:#dff0d8;color:#3c763d;",
-      danger: "background-color:#f2dede;color:#a94442;",
-      info: "background-color:#d9edf7;color:#31708f;",
-      light: "background-color:#ededed;color:#61605f;",
-      warning: "background-color:#fcf8e3;color:#8a6d3b;",
-      dark: "background-color:#807e7d;color:#f7f5f5;",
-      primary: "background-color:#d0e0fc;color:#0b3d91;",
-      secondary: "background-color:#f0d8ff;color:#6b2498;",
-    };
+  constructor(text="This is a notification", localConfig) {
+      this.localConfig = {
+          ...AtomNotification.globalConfig,
+          ...localConfig,
+      };
+      AtomNotification.wrappers[this.localConfig.alignment] = AtomNotification.wrappers[this.localConfig.alignment] ?? AtomNotificationWraper.getWrapper(this.localConfig.alignment);
+                                this.wrappers               = AtomNotification.wrappers;
+                                this.text                   = text;
+  }
 
-    // TODO overight les position par des positions persos !
-    var wrappers = {
-      tr: {
-        id: "#atomNotify-wrapper-tr",
-        html: '<div id="atomNotify-wrapper-tr" style="position:fixed;top:70px;right:10px;z-index:99999;pointer-events:none;"></div>',
-      },
-      tl: {
-        id: "#atomNotify-wrapper-tl",
-        html: '<div id="atomNotify-wrapper-tl" style="position:fixed;top:70px;left:10px;z-index:99999;pointer-events:none;"></div>',
-      },
-      bl: {
-        id: "#atomNotify-wrapper-bl",
-        html: '<div id="atomNotify-wrapper-bl" style="position:fixed;bottom:30px;left:10px;z-index:99999;pointer-events:none;"></div>',
-      },
-      br: {
-        id: "#atomNotify-wrapper-br",
-        html: '<div id="atomNotify-wrapper-br" style="position:fixed;bottom:30px;right:10px;z-index:99999;pointer-events:none;"></div>',
-      },
-    };
-
-    function getOptionDefaultValue(a) {
-      return pluginOptions[a];
-    }
-
-    function isNumeric(n) {
-      return !isNaN(parseFloat(n)) && isFinite(n);
-    }
-
-    function initializeWrappers() {
-      for (const key in wrappers) {
-        $(wrappers[key].id).length === 0 &&
-          $("body").append(wrappers[key].html);
+  show(){
+      var element           = document.createElement('div');
+      element.innerText     = this.text;
+      if(this.localConfig.htmlEnable){
+          element.innerHTML = this.text;
       }
-    }
+      element.style.cssText = AtomNotification.styles.commun;
+      element.classList.add('atom-notification-content');
 
-    function Notification(data, options) {
-      this.options = {};
-      $.extend(this.options, pluginOptions);
-
-      this.id =
-        Date.now().toString(Math.floor(Math.random() * 10) + 10) +
-        Math.floor(Math.random() * 1000).toString(
-          Math.floor(Math.random() * 10) + 10
-        );
-
-      if (typeof options === "string") {
-        this.options.type = options;
-      } else {
-        $.extend(this.options, options);
+      // TODO faire mieux :)
+      switch(this.localConfig.alignment){
+          case 'tr': 
+          case 'br': 
+              AtomAnimation.slideRightIn(element, this.localConfig.showAnimationTime);
+              break;
+          case 'tl'   : 
+          case 'bl'   : 
+               default: 
+              AtomAnimation.slideLeftIn(element, this.localConfig.showAnimationTime);
+              break;
       }
+     
+      AtomNotification.styles[this.localConfig.type].forEach(className => element.classList.add(className));// TODO protect against wrong type
+      this.wrappers[this.localConfig.alignment].element.appendChild(element);
 
-      this.element = $(
-        '<div class="atom-notification-content" style="display:none;' +
-          styles.commun +
-          styles[this.getOption("type", acceptedTypes)] +
-          '">' +
-          data +
-          "</div>"
-      );
-
-      initializeWrappers(
-        this.getIntOption("xWrapperPos"),
-        this.getIntOption("yWrapperPos")
-      );
-      this.run(data);
-    }
-
-    Notification.prototype.run = function (data) {
-      switch (this.getOption("alignment", acceptedAlignment)) {
-        case "top right":
-          $(wrappers.tr.id).append(this.element);
-          break;
-        case "top left":
-          $(wrappers.tl.id).append(this.element);
-          break;
-        case "bottom right":
-          $(wrappers.br.id).append(this.element);
-          break;
-        case "bottom left":
-          $(wrappers.bl.id).append(this.element);
-          break;
+      if (this.localConfig.autoHide) {
+          setTimeout(
+              () => this.destroy(element),
+              this.localConfig.autoHideDelay
+          );
       }
-      this.show();
-    };
+      element.onclick = this.localConfig.clickToHide ? () => this.destroy(element) : null;
+  }
 
-    Notification.prototype.show = function () {
-      this.element.slideToggle(this.getOption("showAnimationTime")).delay(2000);
-      if (this.getOption("autoHide")) {
-        setTimeout(
-          () => this.destroy(),
-          this.getOption("autoHideDelay") -
-            this.getOption("hideAnimationDuration")
-        );
-      }
-      if (this.getOption("clickToHide")) {
-        this.element.click(() => this.destroy());
-      }
-    };
 
-    Notification.prototype.destroy = function () {
-      this.element.hide(this.getOption("hideAnimationDuration"));
+  destroy(element){ 
+      // TODO faire mieux :)
+      switch(this.localConfig.alignment){
+          case 'tr': 
+          case 'br': 
+              AtomAnimation.slideRightOut(element,this.localConfig.hideAnimationDuration);
+              break;
+          case 'tl'   : 
+          case 'bl'   : 
+               default: 
+              AtomAnimation.slideLeftOut(element,this.localConfig.hideAnimationDuration);
+              break;
+      }
+      
       setTimeout(
-        () => this.element.remove(),
-        this.getOption("hideAnimationDuration")
+          () => a_detach(element),
+          this.localConfig.hideAnimationDuration
       );
-    };
+  }
 
-    Notification.prototype.getOption = function (b, a = null) {
-      return !a || a.includes(this.options[b])
-        ? this.options[b]
-        : getOptionDefaultValue(b);
-    };
+  static trigger(text, style){
+      var config = (typeof style === "string" ? {type : style} : style);
+      (new AtomNotification(text, config)).show();
+  }
 
-    Notification.prototype.getIntOption = function (a) {
-      return isNumeric(this.options[a])
-        ? this.options[a]
-        : getOptionDefaultValue(a);
-    };
-
-    $[pluginName] = function (d, o) {
-      new Notification(d, o);
-      return;
-    };
-  })
-);
+  static setGlobalConfiguration(config) {
+      this.globalConfig = {
+          ...this.globalConfig,
+          ...config,
+      };
+  }
+  setLocalConfig(config) {
+      this.localConfig = {
+          ...this.localConfig,
+          ...config,
+      };
+  }
+  getLocalConfig() {
+      return this.localConfig;
+  }
+}
