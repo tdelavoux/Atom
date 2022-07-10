@@ -18,3 +18,14 @@ function a_toggle(el, time = 0.4) {
   }
   el.classList.toggle("a-collapsed");
 }
+
+function a_hide(el, time=400){
+  AtomAnimation.slideUpOut(el, time);
+  setTimeout(() => {
+      el.style.display = "none";
+  }, time);
+}
+  function a_show(el, time=400){
+  AtomAnimation.slideUpIn(el, time);
+  el.style.display = null;
+}
