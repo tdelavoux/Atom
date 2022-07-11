@@ -21,6 +21,5 @@ class AtomSpinnerElement{
 
     stopAndUpdate = function (userContent='') {
         this.target.innerHTML = userContent;
-        this.stop;
     };
 }
