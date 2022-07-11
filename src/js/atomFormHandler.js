@@ -1,5 +1,4 @@
-const E_S = "";
-const N_R_S = "non-required";
+const A_E_S = "";
 
 function a_form_handler_error(item, colorInput, displayMsg, err, errmsg, name) {
   a_detach(item.parentNode.querySelectorAll(".a-input-error-text"));
@@ -65,7 +64,7 @@ async function compute(form, self) {
    *
    */
   form.querySelectorAll(".a-verify-select").forEach((item) => {
-    var verif = item.getAttribute("a-verif") ?? E_S;
+    var verif = item.getAttribute("a-verif") ?? A_E_S;
     var name = item.getAttribute("a-name") ?? "Selecteur";
     var displayMsg = !item.hasAttribute("a-disable-message");
     var alternateVerif = item.getAttribute("a-alternate-verif");
@@ -121,7 +120,7 @@ async function compute(form, self) {
     var errorInf = `Saisie trop courte (min ${minLength} caractères)`;
     var errorOver = `Saisie trop longue (max ${maxLength} caractères)`;
 
-    var isEmpty = !nullable && item.value.trim() === E_S;
+    var isEmpty = !nullable && item.value.trim() === A_E_S;
     var isNan = numericOnly && !a_isNumeric(item.value.trim());
     var inf = item.value.trim().length < minLength;
     var over = maxLength !== null && item.value.trim().length > maxLength;
@@ -176,7 +175,7 @@ async function compute(form, self) {
     var errorInf = `Saisie trop courte (min ${minLength} caractères)`;
     var errorOver = `Saisie trop longue (max ${maxLength} caractères)`;
 
-    var isEmpty = !nullable && item.value.trim() === E_S;
+    var isEmpty = !nullable && item.value.trim() === A_E_S;
     var inf = item.value.trim().length < minLength;
     var over = maxLength !== null && item.value.trim().length > maxLength;
     if (
@@ -246,7 +245,7 @@ async function compute(form, self) {
       var regFormat = regFormat.replace(new RegExp(key, "g"), value);
     }
     var regex = new RegExp(`^${regFormat}$`);
-    var isEmpty = !nullable && item.value.trim() === E_S;
+    var isEmpty = !nullable && item.value.trim() === A_E_S;
     var unmatched = !regex.test(item.value.trim());
     if (
       (checkInvisible || a_isVisible(item)) &&
@@ -318,7 +317,7 @@ async function compute(form, self) {
       var regFormat = regFormat.replace(new RegExp(key, "g"), value);
     }
     var regex = new RegExp(`^${regFormat}$`);
-    var isEmpty = !nullable && item.value.trim() === E_S;
+    var isEmpty = !nullable && item.value.trim() === A_E_S;
     var unmatched = !regex.test(item.value);
     if (
       (checkInvisible || a_isVisible(item)) &&
@@ -362,7 +361,7 @@ async function compute(form, self) {
     var regex = new RegExp(regFormat);
     var regex = new RegExp("^" + regFormat);
 
-    var isEmpty = !nullable && item.value.trim() === E_S;
+    var isEmpty = !nullable && item.value.trim() === A_E_S;
     var unmatched = !regex.test(item.value.trim());
     if (
       (checkInvisible || a_isVisible(item)) &&
@@ -407,7 +406,7 @@ async function compute(form, self) {
     var errorInf = `Valeur trop petite (min ${min})`;
     var errorOver = `Valeur trop grande (max ${max})`;
 
-    var isEmpty = !nullable && item.value.trim() === E_S;
+    var isEmpty = !nullable && item.value.trim() === A_E_S;
     var isNumeric = a_isInt(item.value);
     var inf = a_int(item.value) < min;
     var over = max !== null && a_int(item.value) > max;
@@ -463,7 +462,7 @@ async function compute(form, self) {
     var errorInf = `Valeur trop petite (min ${min})`;
     var errorOver = `Valeur trop grande (max ${max})`;
 
-    var isEmpty = !nullable && item.value.trim() === E_S;
+    var isEmpty = !nullable && item.value.trim() === A_E_S;
     var isNumeric = a_isFloat(item.value);
     var inf = parseFloat(item.value) < min;
     var over = max !== null && parseFloat(item.value) > max;
