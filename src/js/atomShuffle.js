@@ -1,4 +1,4 @@
-class atomShuffleInstance {
+class AtomShuffleInstance {
   constructor(el, customClass = null) {
     if (!(el instanceof HTMLElement)) {
       console.warn("AtomShuffleInstance: Element is not a valid HTMLElement");
