@@ -1,77 +1,48 @@
-(function ($) {
-  $.fn.atomShuffleInstance = function (customClass) {
-    const className =
+class AtomShuffleInstance {
+  constructor(el, customClass = null) {
+    if (!(el instanceof HTMLElement)) {
+      console.warn("AtomShuffleInstance: Element is not a valid HTMLElement");
+      return null;
+    }
+    var className =
       customClass && customClass instanceof String
-        ? "." + customClass
-        : ".shufflingItem";
-
-    this.initialize = function () {
-      $(this).keyup(function () {
-        var input = $(this).val().toLowerCase();
-        if (input) {
-          $(className).each(function () {
-            $(this).is(":hidden") &&
-              $(this).attr("data-title").toLowerCase().includes(input) &&
-              $(this).show(400);
-            $(this).is(":visible") &&
-              !$(this).attr("data-title").toLowerCase().includes(input) &&
-              $(this).hide(300);
-          });
-        } else {
-          $(className + ":hidden").show();
+        ? customClass
+        : "atomShuffleItem";
+    el.addEventListener("keyup", function () {
+      var val = el.value.toLowerCase();
+      var items = document.getElementsByClassName(className);
+      Array.from(items).forEach((it) => {
+        if (!val || it.dataset.title.toLowerCase().includes(val)) {
+          a_show(it);
+        }else{
+          a_hide(it)
         }
       });
-      return this;
-    };
+    });
+  }
+}
 
-    this.destroy = function () {
-      this.unbind();
-      return null;
-    };
-
-    if (this.length > 1) {
-      console.log("Atom Shuffle : Can't initialize on multiple objects.");
-    } else {
-      return this.initialize();
-    }
-  };
-})(jQuery);
-
-/*
- * atomShuffle
- */
-var atomShuffle = function (customOptions) {
-  /*
-   * Variables accessible
-   * in the class
-   */
+let atomShuffle = function (customOptions) {
   var options = {
-    itemSelector: ".atomShuffleItem",
-    animationTime: 400,
+    itemSelector: "atomShuffleItem",
+    animationTime: 500,
     visibility: false,
   };
 
-  /*
-   * Constructor
-   */
   this.construct = function (customOptions) {
-    $.extend(options, customOptions);
+    options = { ...options, ...customOptions };
   };
 
-  /*
-   * Public method
-   * Can be called outside class
-   */
   this.filter = function (funct) {
-    $(options.itemSelector).each(function () {
-      $visible = funct($(this));
-      $isHidden = $(this).hasClass("a-hide");
+    var elements = document.getElementsByClassName(options.itemSelector);
+    Array.from(elements).forEach((el) => {
+      $visible = funct(el);
       $visible &&
-        (options.visibility || $isHidden) &&
-        $(this).removeClass("a-hide");
+        (options.visibility || !a_is_visible(el)) &&
+        a_show(el, options.animationTime);
       !$visible &&
-        (options.visibility || !$isHidden) &&
-        $(this).addClass("a-hide");
+        (options.visibility || a_is_visible(el)) &&
+        a_hide(el, options.animationTime);
     });
   };
 
@@ -79,8 +50,5 @@ var atomShuffle = function (customOptions) {
     delete self;
   };
 
-  /*
-   * Pass options when class instantiated
-   */
   this.construct(customOptions);
 };
