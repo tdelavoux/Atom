@@ -2,8 +2,8 @@ const A_E_S = "";
 
 function a_form_handler_error(item, colorInput, displayMsg, err, errmsg, name) {
   a_detach(item.parentNode.querySelectorAll(".a-input-error-text"));
-  !colorInput && item.parentNode.classList.add("a-form-error");
-  displayMsg && err.push({ elem: item, errorMessage: errmsg, name: name });
+  if (!colorInput) item.parentNode.classList.add("a-form-error");
+  if (displayMsg) err.push({ elem: item, errorMessage: errmsg, name: name });
   return true;
 }
 
@@ -14,48 +14,49 @@ function a_form_reset_error(item) {
 
 /* ########################## GESTION DES CONTROLES ####################### */
 
-/* #########################################################################################################
-    *							Vérification des fomulaires avant soumission
-    ########################################################################################################### */
+/** #########################################################################################################
+ *							Vérification des fomulaires avant soumission
+ *  ########################################################################################################### */
 
-/* Activation au clic sur un bouton de soumission
+/** Activation au clic sur un bouton de soumission
  * Vérifie l'ensemble des champs du formulaire
  *
- * @use	 optional	a-data-function	                  Fonction JS associé au boutton si celui ci ne submit pas de formulaire. La fonction est lancé si aucun élément n'est bloquant
+ * @use	 optional	   a-data-function                   Fonction JS associée au bouton si celui-ci ne submit pas de formulaire. La fonction est lancé si aucun élément n'est bloquant
  * @use  optional    a-check-invisible                 Défini si les champs masqués doivent être pris en compte
- * @use  optional    a-notify-none                     Si reneigné,disable les notofications globales
- * @use  optional    a-notify-all                      Si reneigné,toutes les erreurs sont notifiées
- * @use  optional    a-disable-color                   Si reneigné, ne colore pas les inputs en erreur
- * @use  optional    a-input-notify-none               Si reneigné, disable les message des inputs
+ * @use  optional    a-notify-none                     Si renseigné, disable les notifications globales
+ * @use  optional    a-notify-all                      Si renseigné, toutes les erreurs sont notifiées
+ * @use  optional    a-disable-color                   Si renseigné, ne colore pas les inputs en erreur
+ * @use  optional    a-input-notify-none               Si renseigné, disable les message des inputs
  * @use  optional    a-data-opt-bloc                   Fonction de blocage personnalisée. Si retourne false, bloque le formulaire
  */
-items = document.getElementsByClassName("a-form-handler");
-Array.from(items).forEach((it) => {
-  it.addEventListener("click", function () {
-    var form = this.closest("form");
-    form.submit(function (e) {
-      e.preventDefault();
-      return;
+Array.from(document.getElementsByClassName("a-form-handler")).forEach(
+  (item) => {
+    item.addEventListener("click", function () {
+      const form = this.closest("form");
+      form.submit(function (e) {
+        e.preventDefault();
+        return;
+      });
+      compute(form, this);
     });
-    compute(form, this);
-  });
-});
+  }
+);
 
 async function compute(form, self) {
-  var blocage = false;
-  var notifyNone = form.hasAttribute("a-notify-none");
-  var notifyAll = form.hasAttribute("a-notify-all");
-  var notifyInputNone = form.hasAttribute("a-input-notify-none");
-  var colorInput = form.hasAttribute("a-disable-color");
-  var checkInvisible = form.getAttribute("a-check-invisible");
-  var optVerif = form.getAttribute("a-data-opt-bloc");
-  var callback = form.getAttribute("a-data-function");
-  var err = new Array();
+  let blocking = false;
+  const notifyNone = form.hasAttribute("a-notify-none");
+  const notifyAll = form.hasAttribute("a-notify-all");
+  const notifyInputNone = form.hasAttribute("a-input-notify-none");
+  const colorInput = form.hasAttribute("a-disable-color");
+  const checkInvisible = form.getAttribute("a-check-invisible");
+  const optVerif = form.getAttribute("a-data-opt-bloc");
+  const callback = form.getAttribute("a-data-function");
+  const err = [];
 
   /**
-   * --------- Vérification Des Sélecteurs  ----------
+   * --------- Vérification des sélecteurs  ----------
    *
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-verif          : Value lancant une erreur. par défaut aucune value
    * @use optional  a-name           : Nom du champs pour l'affichage des erreurs
@@ -79,7 +80,7 @@ async function compute(form, self) {
       (checkInvisible || a_isVisible(item)) &&
       (isEmpty || eval(alternateVerif))
     ) {
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item,
         colorInput,
         displayMsg,
@@ -91,11 +92,11 @@ async function compute(form, self) {
   });
 
   /**
-   * --------- Vérification Des champs texte  ----------
+   * --------- Vérification des champs texte  ----------
    *
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
-   * @use optional  a-min-length     : taille minimale du texte à saisir
-   * @use optional  a-max-length     : taille maximale du texte à saisir
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-min-length     : Taille minimale du texte à saisir
+   * @use optional  a-max-length     : Taille maximale du texte à saisir
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-name           : Nom du champs pour l'affichage des erreurs
    * @use optional  a-nullable       : Le champ est obligatoire. Nécéssaire quand le form admet des champs non requis
@@ -103,22 +104,22 @@ async function compute(form, self) {
    *
    */
   form.querySelectorAll(".a-verify-text").forEach((item) => {
-    var minLength = a_int(item.getAttribute("a-min-length"));
-    var maxLength = item.getAttribute("a-max-length")
+    const minLength = a_int(item.getAttribute("a-min-length"));
+    const maxLength = item.getAttribute("a-max-length")
       ? a_int(item.getAttribute("a-max-length"))
       : null;
-    var name = item.getAttribute("a-name") ?? "Texte";
-    var displayMsg = !item.hasAttribute("a-disable-message");
-    var nullable = item.hasAttribute("a-nullable");
-    var alternateVerif = item.getAttribute("a-alternate-verif");
-    var numericOnly = item.hasAttribute("a-numeric-only");
+    const name = item.getAttribute("a-name") ?? "Texte";
+    const displayMsg = !item.hasAttribute("a-disable-message");
+    const nullable = item.hasAttribute("a-nullable");
+    const alternateVerif = item.getAttribute("a-alternate-verif");
+    const numericOnly = item.hasAttribute("a-numeric-only");
 
-    var errCustomMsg =
+    const errCustomMsg =
       item.getAttribute("a-error-message") ?? "Champ incorrect";
-    var errorNumeric = "Caractères numeriques uniquement";
-    var error = "Saisie obligatoire";
-    var errorInf = `Saisie trop courte (min ${minLength} caractères)`;
-    var errorOver = `Saisie trop longue (max ${maxLength} caractères)`;
+    const errorNumeric = "Caractères numériques uniquement";
+    const error = "Saisie obligatoire";
+    const errorInf = `Saisie trop courte (min ${minLength} caractères)`;
+    const errorOver = `Saisie trop longue (max ${maxLength} caractères)`;
 
     var isEmpty = !nullable && item.value.trim() === A_E_S;
     var isNan = numericOnly && !a_isNumeric(item.value.trim());
@@ -128,7 +129,7 @@ async function compute(form, self) {
       (checkInvisible || a_isVisible(item)) &&
       (isEmpty || isNan || inf || over || eval(alternateVerif))
     ) {
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item,
         colorInput,
         displayMsg,
@@ -150,7 +151,7 @@ async function compute(form, self) {
   /**
    * --------- Vérification Des champs textarea avec count  ----------
    *
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-min-length     : taille minimale du texte à saisir
    * @use optional  a-max-length     : taille maximale du texte à saisir
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
@@ -160,24 +161,24 @@ async function compute(form, self) {
    *
    */
   form.querySelectorAll(".a-verify-textarea-with-count").forEach((item) => {
-    var minLength = a_int(item.getAttribute("a-min-length"));
-    var maxLength = item.getAttribute("a-max-length")
+    const minLength = a_int(item.getAttribute("a-min-length"));
+    const maxLength = item.getAttribute("a-max-length")
       ? a_int(item.getAttribute("a-max-length"))
       : null;
-    var name = item.getAttribute("a-name") ?? "Commentaire";
-    var displayMsg = !item.hasAttribute("a-disable-message");
-    var nullable = item.hasAttribute("a-nullable");
-    var alternateVerif = item.getAttribute("a-alternate-verif");
+    const name = item.getAttribute("a-name") ?? "Commentaire";
+    const displayMsg = !item.hasAttribute("a-disable-message");
+    const nullable = item.hasAttribute("a-nullable");
+    const alternateVerif = item.getAttribute("a-alternate-verif");
 
-    var errCustomMsg =
+    const errCustomMsg =
       item.getAttribute("a-error-message") ?? "Champ incorrect";
-    var error = "Saisie obligatoire";
-    var errorInf = `Saisie trop courte (min ${minLength} caractères)`;
-    var errorOver = `Saisie trop longue (max ${maxLength} caractères)`;
+    const error = "Saisie obligatoire";
+    const errorInf = `Saisie trop courte (min ${minLength} caractères)`;
+    const errorOver = `Saisie trop longue (max ${maxLength} caractères)`;
 
-    var isEmpty = !nullable && item.value.trim() === A_E_S;
-    var inf = item.value.trim().length < minLength;
-    var over = maxLength !== null && item.value.trim().length > maxLength;
+    const isEmpty = !nullable && item.value.trim() === A_E_S;
+    const inf = item.value.trim().length < minLength;
+    const over = maxLength !== null && item.value.trim().length > maxLength;
     if (
       (checkInvisible || a_isVisible(item)) &&
       (isEmpty || inf || over || eval(alternateVerif))
@@ -185,7 +186,7 @@ async function compute(form, self) {
       a_detach(
         item.parentNode.querySelectorAll(".a-input-error-text-with-count")
       );
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item,
         colorInput,
         displayMsg,
@@ -198,7 +199,7 @@ async function compute(form, self) {
 
   /**
    * --------- Vérification Des champs Date  ----------
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-date-format    : format de la date a vérifier (accepté les YY, YYYY, DD, MM, /, -)
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-name           : Nom du champs pour l'affichage des erreurs
@@ -206,27 +207,26 @@ async function compute(form, self) {
    * @use optional  a-disable-message: Permet de désactiver l'affichage des message sous les champs input
    */
   form.querySelectorAll(".a-verify-date").forEach((item) => {
-    var name = item.getAttribute("a-name") ?? "Date";
-    var displayMsg = !item.hasAttribute("a-disable-message");
-    var nullable = item.hasAttribute("a-nullable");
-    var alternateVerif = item.getAttribute("a-alternate-verif");
-    var format = item.getAttribute("a-date-format") ?? "d/m/Y";
+    const name = item.getAttribute("a-name") ?? "Date";
+    const displayMsg = !item.hasAttribute("a-disable-message");
+    const nullable = item.hasAttribute("a-nullable");
+    const alternateVerif = item.getAttribute("a-alternate-verif");
 
-    var regex = new RegExp("^([d|m|y|Y|h|H|i|s|-| |:|/]*)$");
-    if (!regex.test(format.trim())) {
+    let format = item.getAttribute("a-date-format") ?? "d/m/Y";
+    if (!/^([d|m|y|Y|h|H|i|s|-| |:|/]*)$/.test(format.trim())) {
       console.warn(
         `AtomFormHandler: ${format} n'est pas un format valide. Intitialisation a la valeur par défaut d/m/Y`
       );
       format = "d/m/Y";
     }
 
-    var errCustomMsg =
+    const errCustomMsg =
       item.getAttribute("a-error-message") ?? "Champ incorrect";
-    var error = "Saisie obligatoire";
-    var errorFormat = `Format invalide. Attendu : ${format}`;
+    const error = "Saisie obligatoire";
+    const errorFormat = `Format invalide. Attendu : ${format}`;
 
     // Formatage de la REGEX a partir du format
-    var rules = {
+    const rules = {
       "/": "([\\/])",
       " ": "([ ])",
       "-": "([-])",
@@ -240,18 +240,18 @@ async function compute(form, self) {
       i: "(0?[0-9]|[1-5][0-9])",
       s: "(0?[0-9]|[1-5][0-9])",
     };
-    var regFormat = format;
+    let regFormat = format;
     for (const [key, value] of Object.entries(rules)) {
-      var regFormat = regFormat.replace(new RegExp(key, "g"), value);
+      regFormat = regFormat.replace(new RegExp(key, "g"), value);
     }
-    var regex = new RegExp(`^${regFormat}$`);
+
     var isEmpty = !nullable && item.value.trim() === A_E_S;
-    var unmatched = !regex.test(item.value.trim());
+    var unmatched = !new RegExp(`^${regFormat}$`).test(item.value.trim());
     if (
       (checkInvisible || a_isVisible(item)) &&
       (isEmpty || unmatched || eval(alternateVerif))
     ) {
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item,
         colorInput,
         displayMsg,
@@ -265,7 +265,7 @@ async function compute(form, self) {
   /**
    * --------- Vérification Des champs Telephone  ----------
    *
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-phone-format   : Format attendu du numéro de téléphone. Par défaut XX.XX.XX.XX.XX. Accept . - / +
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-name           : Nom du champs pour l'affichage des erreurs
@@ -274,25 +274,25 @@ async function compute(form, self) {
    *
    */
   form.querySelectorAll(".a-verify-phone").forEach((item) => {
-    var name = item.getAttribute("a-name") ?? "Telephone";
-    var displayMsg = !item.hasAttribute("a-disable-message");
-    var nullable = item.hasAttribute("a-nullable");
-    var alternateVerif = item.getAttribute("a-alternate-verif");
-    var format = item.getAttribute("a-phone-format") ?? "XXXXXXXXXX";
-    var regex = new RegExp("^([0|1|2|3|4|5|6|7|8|9|X|-| |+|:|.|/]*)$");
-    if (!regex.test(format.trim())) {
+    const name = item.getAttribute("a-name") ?? "Telephone";
+    const displayMsg = !item.hasAttribute("a-disable-message");
+    const nullable = item.hasAttribute("a-nullable");
+    const alternateVerif = item.getAttribute("a-alternate-verif");
+
+    let format = item.getAttribute("a-phone-format") ?? "XXXXXXXXXX";
+    if (/^([0|1|2|3|4|5|6|7|8|9|X|-| |+|:|.|/]*)$/.test(format.trim())) {
       console.warn(
         `AtomFormHandler: ${format} n'est pas un format valide. Intitialisation a la valeur par défaut XXXXXXXXXX`
       );
       format = "XXXXXXXXXX";
     }
 
-    var errCustomMsg =
+    const errCustomMsg =
       item.getAttribute("a-error-message") ?? "Champ incorrect";
-    var error = "Saisie obligatoire";
-    var errorFormat = `Format invalide. Attendu : ${format.toUpperCase()}`;
+    const error = "Saisie obligatoire";
+    const errorFormat = `Format invalide. Attendu : ${format.toUpperCase()}`;
 
-    var rules = {
+    const rules = {
       "/": "([\\/])",
       0: "([0])",
       1: "([1])",
@@ -312,18 +312,18 @@ async function compute(form, self) {
       X: "([0-9])",
     };
 
-    var regFormat = format;
+    let regFormat = format;
     for (const [key, value] of Object.entries(rules)) {
-      var regFormat = regFormat.replace(new RegExp(key, "g"), value);
+      regFormat = regFormat.replace(new RegExp(key, "g"), value);
     }
-    var regex = new RegExp(`^${regFormat}$`);
-    var isEmpty = !nullable && item.value.trim() === A_E_S;
-    var unmatched = !regex.test(item.value);
+
+    const isEmpty = !nullable && item.value.trim() === A_E_S;
+    const unmatched = !new RegExp(`^${regFormat}$`).test(item.value);
     if (
       (checkInvisible || a_isVisible(item)) &&
       (isEmpty || unmatched || eval(alternateVerif))
     ) {
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item,
         colorInput,
         displayMsg,
@@ -337,7 +337,7 @@ async function compute(form, self) {
   /**
    * --------- Vérification Des champs email  ----------
    *
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-name           : Nom du champs pour l'affichage des erreurs
    * @use optional  a-nullable       : Le champ est obligatoire. Nécéssaire quand le form admet des champs non requis
@@ -345,29 +345,27 @@ async function compute(form, self) {
    *
    */
   form.querySelectorAll(".a-verify-email").forEach((item) => {
-    var name = item.getAttribute("a-name") ?? "Email";
-    var displayMsg = !item.hasAttribute("a-disable-message");
-    var nullable = item.hasAttribute("a-nullable");
-    var alternateVerif = item.getAttribute("a-alternate-verif");
+    const name = item.getAttribute("a-name") ?? "Email";
+    const displayMsg = !item.hasAttribute("a-disable-message");
+    const nullable = item.hasAttribute("a-nullable");
+    const alternateVerif = item.getAttribute("a-alternate-verif");
 
-    var errCustomMsg =
+    const errCustomMsg =
       item.getAttribute("a-error-message") ?? "Champ incorrect";
-    var error = "Saisie obligatoire.";
-    var errorFormat = "Format email invalide.";
+    const error = "Saisie obligatoire.";
+    const errorFormat = "Format email invalide.";
 
-    // Formatage de la REGEX a partir du format
-    var regMail = "\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+";
-    var regFormat = "^" + regMail + "$";
-    var regex = new RegExp(regFormat);
-    var regex = new RegExp("^" + regFormat);
+    // From https://www.emailregex.com/
+    const regexEmail =
+      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    var isEmpty = !nullable && item.value.trim() === A_E_S;
-    var unmatched = !regex.test(item.value.trim());
+    const isEmpty = !nullable && item.value.trim() === A_E_S;
+    const unmatched = !regexEmail.test(item.value.trim());
     if (
       (checkInvisible || a_isVisible(item)) &&
       (isEmpty || unmatched || eval(alternateVerif))
     ) {
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item,
         colorInput,
         displayMsg,
@@ -381,7 +379,7 @@ async function compute(form, self) {
   /**
    * --------- Vérification Des champs Int  ----------
    *
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-name           : Nom du champs pour l'affichage des erreurs
    * @use optional  a-nullable       : Le champ est obligatoire. Nécéssaire quand le form admet des champs non requis
@@ -390,31 +388,31 @@ async function compute(form, self) {
    * @use optional  a-max				: taille maximale de l'objet. Default 2147483647
    */
   form.querySelectorAll(".a-verify-int").forEach((item) => {
-    var min = a_int(item.getAttribute("a-min"));
-    var max = item.getAttribute("a-max")
+    const min = a_int(item.getAttribute("a-min"));
+    const max = item.getAttribute("a-max")
       ? a_int(item.getAttribute("a-max"))
       : null;
-    var name = item.getAttribute("a-name") ?? "Integer";
-    var displayMsg = !item.hasAttribute("a-disable-message");
-    var nullable = item.hasAttribute("a-nullable");
-    var alternateVerif = item.getAttribute("a-alternate-verif");
+    const name = item.getAttribute("a-name") ?? "Integer";
+    const displayMsg = !item.hasAttribute("a-disable-message");
+    const nullable = item.hasAttribute("a-nullable");
+    const alternateVerif = item.getAttribute("a-alternate-verif");
 
-    var errCustomMsg =
+    const errCustomMsg =
       item.getAttribute("a-error-message") ?? "Champ incorrect";
-    var error = "Saisie obligatoire";
-    var errorType = "Nombre entier attendu.";
-    var errorInf = `Valeur trop petite (min ${min})`;
-    var errorOver = `Valeur trop grande (max ${max})`;
+    const error = "Saisie obligatoire";
+    const errorType = "Nombre entier attendu.";
+    const errorInf = `Valeur trop petite (min ${min})`;
+    const errorOver = `Valeur trop grande (max ${max})`;
 
-    var isEmpty = !nullable && item.value.trim() === A_E_S;
-    var isNumeric = a_isInt(item.value);
-    var inf = a_int(item.value) < min;
-    var over = max !== null && a_int(item.value) > max;
+    const isEmpty = !nullable && item.value.trim() === A_E_S;
+    const isNumeric = a_isInt(item.value);
+    const inf = a_int(item.value) < min;
+    const over = max !== null && a_int(item.value) > max;
     if (
       (checkInvisible || a_isVisible(item)) &&
       (isEmpty || !isNumeric || inf || over || eval(alternateVerif))
     ) {
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item,
         colorInput,
         displayMsg,
@@ -436,7 +434,7 @@ async function compute(form, self) {
   /**
    * --------- Vérification Des champs Float  ----------
    *
-   * @use optional  a-alternate-verif : Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif : Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-error-message   : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-name            : Nom du champs pour l'affichage des erreurs
    * @use optional  a-nullable        : Le champ est obligatoire. Nécéssaire quand le form admet des champs non requis
@@ -446,31 +444,31 @@ async function compute(form, self) {
    *
    */
   form.querySelectorAll(".a-verify-float").forEach((item) => {
-    var min = a_int(item.getAttribute("a-min"));
-    var max = item.getAttribute("a-max")
-      ? a_int(item.getAttribute("a-max"))
+    const min = a_safe_float(item.getAttribute("a-min"));
+    const max = item.getAttribute("a-max")
+      ? a_safe_float(item.getAttribute("a-max"))
       : null;
-    var name = item.getAttribute("a-name") ?? "Float";
-    var displayMsg = !item.hasAttribute("a-disable-message");
-    var nullable = item.hasAttribute("a-nullable");
-    var alternateVerif = item.getAttribute("a-alternate-verif");
+    const name = item.getAttribute("a-name") ?? "Float";
+    const displayMsg = !item.hasAttribute("a-disable-message");
+    const nullable = item.hasAttribute("a-nullable");
+    const alternateVerif = item.getAttribute("a-alternate-verif");
 
-    var errCustomMsg =
+    const errCustomMsg =
       item.getAttribute("a-error-message") ?? "Champ incorrect";
-    var error = "Saisie obligatoire";
-    var errorType = "Nombre entier attendu.";
-    var errorInf = `Valeur trop petite (min ${min})`;
-    var errorOver = `Valeur trop grande (max ${max})`;
+    const error = "Saisie obligatoire";
+    const errorType = "Nombre entier attendu.";
+    const errorInf = `Valeur trop petite (min ${min})`;
+    const errorOver = `Valeur trop grande (max ${max})`;
 
-    var isEmpty = !nullable && item.value.trim() === A_E_S;
-    var isNumeric = a_isFloat(item.value);
-    var inf = parseFloat(item.value) < min;
-    var over = max !== null && parseFloat(item.value) > max;
+    const isEmpty = !nullable && item.value.trim() === A_E_S;
+    const isNumeric = a_isFloat(item.value);
+    const inf = parseFloat(item.value) < min;
+    const over = max !== null && parseFloat(item.value) > max;
     if (
       (checkInvisible || a_isVisible(item)) &&
       (isEmpty || !isNumeric || inf || over || eval(alternateVerif))
     ) {
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item,
         colorInput,
         displayMsg,
@@ -490,9 +488,9 @@ async function compute(form, self) {
   });
 
   /**
-   * --------- Verification Des checkboxs  ----------
+   * --------- Vérification des checkboxs  ----------
    *
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-nullable        : Le champ est obligatoire. Nécéssaire quand le form admet des champs non requis
    * @use optional  a-name           : nom du champ pour identifcation de l'erreur
@@ -500,21 +498,21 @@ async function compute(form, self) {
    *
    */
   form.querySelectorAll(".a-verify-checked").forEach((item) => {
-    var name = item.getAttribute("a-name") ?? "Checkbox";
-    var displayMsg = !item.hasAttribute("a-disable-message");
-    var nullable = item.hasAttribute("a-nullable");
-    var alternateVerif = item.getAttribute("a-alternate-verif");
+    const name = item.getAttribute("a-name") ?? "Checkbox";
+    const displayMsg = !item.hasAttribute("a-disable-message");
+    const nullable = item.hasAttribute("a-nullable");
+    const alternateVerif = item.getAttribute("a-alternate-verif");
 
-    var errCustomMsg =
+    const errCustomMsg =
       item.getAttribute("a-error-message") ?? "Champ incorrect";
-    var error = "Checkbox obligatoire";
+    const error = "Checkbox obligatoire";
 
-    var isEmpty = !nullable && !item.checked;
+    const isEmpty = !nullable && !item.checked;
     if (
       (checkInvisible || a_isVisible(item.parentNode)) &&
       (isEmpty || eval(alternateVerif))
     ) {
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item,
         colorInput,
         displayMsg,
@@ -537,7 +535,7 @@ async function compute(form, self) {
    * --------- Vérification Radios & Checkbox multiples  ----------
    * Verification de la sélection d'une checkbox parmis une liste
    *
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-name           : nom du champ pour identifcation de l'erreur
    * @use required  a-shared-name    : nom idantifiant les elements de la liste des checkboxs a vérifier
@@ -547,18 +545,18 @@ async function compute(form, self) {
   form
     .querySelectorAll(".a-verify-one-in-list, a-verify-radio")
     .forEach((item) => {
-      var name = item.getAttribute("a-name") ?? "Choix";
-      var displayMsg = !item.hasAttribute("a-disable-message");
-      var nullable = item.hasAttribute("a-nullable");
-      var alternateVerif = item.getAttribute("a-alternate-verif");
+      const name = item.getAttribute("a-name") ?? "Choix";
+      const displayMsg = !item.hasAttribute("a-disable-message");
+      const nullable = item.hasAttribute("a-nullable");
+      const alternateVerif = item.getAttribute("a-alternate-verif");
 
-      var errCustomMsg =
+      const errCustomMsg =
         item.getAttribute("a-error-message") ?? "Champ incorrect";
-      var error = "Une coche obligatoire";
+      const error = "Une coche obligatoire";
 
-      var checkName = item.getAttribute("name");
-      var allChecks = form.querySelectorAll(`input[name="${checkName}"]`);
-      var isEmpty =
+      const checkName = item.getAttribute("name");
+      const allChecks = form.querySelectorAll(`input[name="${checkName}"]`);
+      const isEmpty =
         !nullable &&
         Array.prototype.slice
           .call(allChecks)
@@ -566,7 +564,7 @@ async function compute(form, self) {
             (x) => x.checked && (checkInvisible || a_isVisible(item.parentNode))
           );
       if (isEmpty || eval(alternateVerif)) {
-        blocage = a_form_handler_error(
+        blocking = a_form_handler_error(
           item,
           colorInput,
           displayMsg,
@@ -589,26 +587,26 @@ async function compute(form, self) {
    * --------- Vérification Des Input Files  ----------
    * Verification simple que l'un des input files a bien un fichier sélectionné
    *
-   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle ci doit renvoyer vrai si le blocage est effectif
+   * @use optional  a-alternate-verif: Fonction complémentaire de vérification du contenu. Celle-ci doit renvoyer vrai si le blocage est effectif
    * @use optional  a-error-message  : Message d'erreur personnalisé précisiant l'erreur souvelvée par la fonction de verification alternative
    * @use optional  a-name           : Nom du champs pour l'affichage des erreurs
    * @use optional  a-disable-message     : Permet de désactiver l'affichage des message sous les champs input
    */
   form.querySelectorAll(".a-verify-file").forEach((item) => {
-    var name = item.getAttribute("a-name") ?? "Fichier";
-    var displayMsg = !item.hasAttribute("a-disable-message");
-    var nullable = item.hasAttribute("a-nullable");
-    var alternateVerif = item.getAttribute("a-alternate-verif");
+    const name = item.getAttribute("a-name") ?? "Fichier";
+    const displayMsg = !item.hasAttribute("a-disable-message");
+    const nullable = item.hasAttribute("a-nullable");
+    const alternateVerif = item.getAttribute("a-alternate-verif");
 
-    var errCustomMsg =
+    const errCustomMsg =
       item.getAttribute("a-error-message") ?? "Champ incorrect";
-    var error = "Fichier obligatoire";
-    var isEmpty = !nullable && !item.files.length;
+    const error = "Fichier obligatoire";
+    const isEmpty = !nullable && !item.files.length;
     if (
       (checkInvisible || a_isVisible(item.parentNode)) &&
       (isEmpty || eval(alternateVerif))
     ) {
-      blocage = a_form_handler_error(
+      blocking = a_form_handler_error(
         item.parentNode,
         colorInput,
         displayMsg,
@@ -621,10 +619,10 @@ async function compute(form, self) {
 
   // Si une fonction perso est définie, on évalue le blocage
   if (optVerif !== false && (await eval(optVerif)) === true) {
-    blocage = true;
+    blocking = true;
   }
 
-  if (blocage === true) {
+  if (blocking === true) {
     //Création d'un id unique pour éviter les collisions de blocs
 
     !notifyInputNone &&
@@ -669,32 +667,33 @@ async function compute(form, self) {
   self.blur();
 }
 
-/* #####################################################
-*	Réinitialisation des couleurs des champs de saisie
-####################################################### */
+/** #####################################################
+ *	 Réinitialisation des couleurs des champs de saisie
+ *  ##################################################### */
 
 function reinitColor(form) {
-  elements = form.querySelectorAll(".a-verify-select");
-  Array.from(elements).forEach((it) => {
-    it.addEventListener("change", function () {
+  Array.from(form.querySelectorAll(".a-verify-select")).forEach((item) => {
+    item.addEventListener("change", function () {
       a_form_reset_error(this);
     });
   });
 
-  elements = form.querySelectorAll(
-    ".a-verify-text, .a-verify-textarea-with-count, .a-verify-date, .a-verify-phone, .a-verify-email, .a-verify-int, .a-verify-float"
-  );
-  Array.from(elements).forEach((it) => {
-    it.addEventListener("keyup", function () {
+  Array.from(
+    form.querySelectorAll(
+      ".a-verify-text, .a-verify-textarea-with-count, .a-verify-date, .a-verify-phone, .a-verify-email, .a-verify-int, .a-verify-float"
+    )
+  ).forEach((item) => {
+    item.addEventListener("keyup", function () {
       a_form_reset_error(this);
     });
   });
 
-  elements = form.querySelectorAll(
-    ".a-verify-checked, .a-verify-one-in-list, a-verify-radio, .a-verify-file"
-  );
-  Array.from(elements).forEach((it) => {
-    it.addEventListener("change", function () {
+  Array.from(
+    form.querySelectorAll(
+      ".a-verify-checked, .a-verify-one-in-list, a-verify-radio, .a-verify-file"
+    )
+  ).forEach((item) => {
+    item.addEventListener("change", function () {
       a_form_reset_error(this.parentNode);
     });
   });

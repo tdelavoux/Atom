@@ -19,8 +19,12 @@ function a_detach(n) {
   }
 }
 
-function a_int(n, d = 0) {
-  return !n || isNaN(n) ? d : parseInt(n);
+function a_int(number, defaultValue = 0) {
+  if (!number || isNaN(number)) {
+    return defaultValue;
+  }
+
+  return parseInt(number);
 }
 
 function a_isInt(v) {
@@ -30,6 +34,14 @@ function a_isInt(v) {
     ((x = parseFloat(v)), (0 | x) === x) &&
     !v.toUpperCase().includes("E")
   );
+}
+
+function a_safe_float(number, defaultValue = 0) {
+  if (!number || isNaN(number)) {
+    return defaultValue;
+  }
+
+  return parseFloat(number);
 }
 
 function a_isFloat(v) {
