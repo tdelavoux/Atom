@@ -45,6 +45,5 @@ function a_safe_float(number, defaultValue = 0) {
 }
 
 function a_isFloat(v) {
-  var x;
   return !isNaN(v) && !v.toUpperCase().includes("E");
 }
