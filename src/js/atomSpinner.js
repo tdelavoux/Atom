@@ -19,7 +19,7 @@ class AtomSpinnerElement{
         this.pre_content = null;
     }
 
-    stopAndUpdate = function (userContent='') {
+    stopAndUpdate(userContent='') {
         this.target.innerHTML = userContent;
     };
 }
