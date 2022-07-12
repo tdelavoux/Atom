@@ -12,15 +12,10 @@ class AtomShuffleInstance {
       var val = el.value.toLowerCase();
       var items = document.getElementsByClassName(className);
       Array.from(items).forEach((it) => {
-        if (val) {
-          !a_is_visible(it) &&
-            it.dataset.title.toLowerCase().includes(val) &&
-            a_show(it);
-          a_is_visible(it) &&
-            !it.dataset.title.toLowerCase().includes(val) &&
-            a_hide(it);
-        } else {
-          !a_is_visible(it) && a_show(it);
+        if (!val || it.dataset.title.toLowerCase().includes(val)) {
+          a_show(it);
+        }else{
+          a_hide(it)
         }
       });
     });
