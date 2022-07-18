@@ -203,10 +203,15 @@ select.a-input:focus + label:last-of-type {
   outline: none !important;
   box-shadow: none !important;
 }
-input.a-input:disabled,
-input.a-input:read-only,
-select.a-input:disabled {
+.a-input:disabled,
+.a-input:read-only{
   cursor: not-allowed;
+}
+.a-input-group .a-input-button {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  opacity: 0.7;
 }
 input.a-input:not(:placeholder-shown),
 select.a-input {
@@ -219,7 +224,7 @@ select.a-input {
   font-weight: 500;
 }
 .a-input::placeholder,
-select.a-input:required:invalid {
+select.a-input:not(:disabled):not(:read-only):required:invalid {
   opacity: 0.6;
   font-style: italic;
 }
@@ -227,11 +232,13 @@ select.a-input:required:invalid {
 .a-input:read-only::placeholder {
   opacity: 0;
 }
-input.a-input:disabled + label,
-input.a-input:read-only + label,
-select.a-input:disabled + label {
-  opacity: 0.4;
-}
+:is(input.a-input:read-only, input.a-input:disabled, select.a-input:read-only, select.a-input:disabled) ~ *,
+select.a-input:read-only,
+select.a-input:disabled
+{
+    opacity: 0.4;
+    cursor: not-allowed;
+}   
 input.a-input:disabled,
 input.a-input:read-only {
   border-radius: 5px 5px 0px 0px;
@@ -283,12 +290,6 @@ input.a-input:read-only {
 }
 .a-borderless {
   border: none !important;
-}
-.a-input-group .a-input-button {
-  position: absolute;
-  right: 8px;
-  bottom: 8px;
-  opacity: 0.7;
 }
 .a-borderfull {
   border: solid 1px var(--medium-border-gray);
