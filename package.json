@@ -10,7 +10,10 @@
     "lint-staged": "lint-staged",
     "format": "prettier --write src/**/*.{js,scss}",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
   "repository": {
     "type": "git",
@@ -39,5 +42,9 @@
   "lint-staged": {
     "src/js/*.js": "prettier --write",
     "src/css/*.scss": "prettier --write"
+  },
+  "dependencies": {
+    "vitepress": "^1.0.0-alpha.4",
+    "vue": "^3.2.37"
   }
 }
