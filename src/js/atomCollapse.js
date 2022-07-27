@@ -9,7 +9,6 @@ $(document.body).on("click", ".a-collapsable", function () {
     target.removeClass("a-collapsed");
   } else {
     target.addClass("collapsed");
-    target.addClass("a-collapsed");
     target.hide(300);
   }
 });
