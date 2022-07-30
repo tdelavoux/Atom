@@ -1,5 +1,5 @@
-const direction = ["asc", "desc"];
-const types = [
+const a_direction = ["asc", "desc"];
+const a_types = [
   "string",
   "number",
   "Ymd",
@@ -9,27 +9,18 @@ const types = [
   "d-m-y",
 ];
 
-function a_detach(el){
-  var res = [];
-  while(el.children.length > 0){
-      res.push(el.removeChild(el.children[0]));
-  }
-  return res;
-}
 
 class AtomDatatable{
 
   constructor(table, customOptions) {
-    if (table.length > 1) {
-      console.log("Atom Datatable : Can't initialize on multiple objects.");
+    if(!a_isHtml(table)){
+      console.error('Atom Datatable : Can only initialize on a DOM Element.');
+      return 1;
     }
 
-    if(table instanceof jQuery){
-      table = table.get(0);
-    }
-
-    if(table === null){
-      console.warn('AtomDatatable : Cannot initialize on null.');
+    if(table.nodeName !== "TABLE"){
+      console.error('Atom Datatable : Can only initialize on a <table> element.');
+      return 2;
     }
 
     this.sortIcon = `<i class="fas fa-sort"></i>`;
@@ -119,7 +110,7 @@ class AtomDatatable{
 
   addClassSortHead() {
     if (this.options.orderableColumn instanceof Array) {
-      this.options.orderableColumn.foreach(colNumber => {
+      this.options.orderableColumn.forEach(colNumber => {
         if (!isNaN(colNumber)) {
           //colType = types.includes(options.columnType[colNumber]) ? options.columnType[colNumber] :  types[0];
           this.table.querySelector("th:nth-child("+colNumber+")").innerHTML += this.sortIcon;
@@ -148,23 +139,23 @@ class AtomDatatable{
       return;
     }
     var ascending;
-    var rows = a_detach(this.table.querySelector("tbody"));
+    var rows = a_detachAndGet(this.table.querySelector("tbody"));
     for(var row of rows){
       if (!row.hasAttribute(this.directionAttr)) {
-        row.setAttribute(this.directionAttr, direction[0]);
+        row.setAttribute(this.directionAttr, a_direction[0]);
         ascending = true;
-      } else if (row.getAttribute(this.directionAttr) == direction[0]) {
-        row.setAttribute(this.directionAttr, direction[1]);
+      } else if (row.getAttribute(this.directionAttr) == a_direction[0]) {
+        row.setAttribute(this.directionAttr, a_direction[1]);
         ascending = false;
-      } else if (row.getAttribute(this.directionAttr) == direction[1]) {
-        row.setAttribute(this.directionAttr, direction[0]);
+      } else if (row.getAttribute(this.directionAttr) == a_direction[1]) {
+        row.setAttribute(this.directionAttr, a_direction[0]);
         ascending = true;
       }
     };
 
-    var colType = types.includes(this.options.columnType[colNumber])
+    var colType = a_types.includes(this.options.columnType[colNumber])
       ? this.options.columnType[colNumber]
-      : types[0];
+      : a_types[0];
     this.functionCaller(colType, ascending, colNumber, rows);
     
     this.reOrderNb(rows);
@@ -172,7 +163,7 @@ class AtomDatatable{
       this.table.querySelector("tbody").appendChild(row);
     }
     
-    //displayPages(table.attr("data-page"));
+    this.displayPages(this.table.dataset.page);
   }
 
   sortString(rows, value, ascending) {
@@ -197,7 +188,7 @@ class AtomDatatable{
         isNaN(a.children[value].innerHTML) ||
         isNaN(b.children[value].innerHTML)
       ) {
-        throwError(value, rows);
+        this.throwError(value, rows);
       }
 
       if (ascending) {
@@ -221,7 +212,7 @@ class AtomDatatable{
           return b.children[value].innerHTML - a.children[value].innerHTML;
         }
       } else {
-        throwError(value, rows);
+        this.throwError(value, rows);
       }
     });
   }
@@ -245,7 +236,7 @@ class AtomDatatable{
           );
         }
       } else {
-        throwError(value, rows);
+        this.throwError(value, rows);
       }
     });
   }
@@ -279,7 +270,7 @@ class AtomDatatable{
           );
         }
       } else {
-        throwError(value, rows);
+        this.throwError(value, rows);
       }
     });
   }
@@ -313,7 +304,7 @@ class AtomDatatable{
           );
         }
       } else {
-        throwError(value, rows);
+        this.throwError(value, rows);
       }
     });
   }
@@ -347,12 +338,13 @@ class AtomDatatable{
           );
         }
       } else {
-        throwError(value, rows);
+        this.throwError(value, rows);
       }
     });
   }
 
   functionCaller(funcName, ascending, value, rows) {
+    value--; //Because we access the array of children that starts from 0 whereas the selector nth-child starts from 1
     var functions = {
       string: () => {
         this.sortString(rows, value, ascending);
@@ -396,7 +388,7 @@ class AtomDatatable{
     if (!this.options.nbPerPage) {
       return;
     }
-    var rows = a_detach(this.table.querySelector("tbody"));
+    var rows = a_detachAndGet(this.table.querySelector("tbody"));
     var nb = 0;
 
     rows.forEach((row) => {
@@ -537,7 +529,9 @@ class AtomDatatable{
 
     this.reOrderNb(rows);
 
-    var maxBtn = parseInt(rows.length / this.options.nbPerPage);
+    var maxBtn = parseInt(rows.length / this.options.nbPerPage)-1;
+    if(parseInt(rows.length)%parseInt(this.options.nbPerPage) != 0){maxBtn++;}
+
     this.displayPagesBtn(maxBtn);
     this.displayPages(0);
   }
