@@ -28,7 +28,13 @@
 .a-text-success {
   color: var(--t-sucess);
 }
+.a-text-dark{
+  color: var(--h-light);
+}
 
+.a-bg-success {
+  background-color: var(--p-sucess);
+}
 .a-bg-primary {
   background-color: var(--p-primary);
 }
@@ -50,9 +56,32 @@
 .a-bg-info {
   background-color: var(--p-info);
 }
-.a-bg-success {
-  color: var(--p-sucess);
+
+.a-h-success {
+  background-color: var(--h-sucess);
 }
+.a-h-primary {
+  background-color: var(--h-primary);
+}
+.a-h-secondary {
+  background-color: var(--h-secondary);
+}
+.a-h-light {
+  background-color: var(--h-light);
+}
+.a-h-dark {
+  background-color: var(--p-light);
+}
+.a-h-danger {
+  background-color: var(--h-danger);
+}
+.a-h-warning {
+  background-color: var(--h-waring);
+}
+.a-h-info {
+  background-color: var(--h-info);
+}
+
 
 /* ----------------------------------------- POSITIONS ---------------------------------------------------------------------- */
 .center {
