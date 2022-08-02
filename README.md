@@ -5,7 +5,7 @@
 <p align="center">
   Light front-end framework designed for faster web developments.
   <br>
-  <!--<a href="#"><strong>Explore online documentation</strong></a>-->
+  <a href="https://atom-documentation.netlify.app"><strong>Explore online documentation</strong></a>
 </p>
 
 ## Contributing
