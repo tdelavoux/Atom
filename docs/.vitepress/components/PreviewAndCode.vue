@@ -1,4 +1,7 @@
 <template>
-  # salut vous
-  oui
+  <slot />
+
+  <code>
+    <pre v-html="slot"></pre>
+  </code>
 </template>

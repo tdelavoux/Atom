@@ -198,18 +198,21 @@ title: Atom Buttons
 
 ## Buttons sizes
 
-<button class="a-btn-xs a-danger">danger</button>
-<button class="a-btn-sm a-primary">Primary</button>
-<button class="a-btn a-secondary">Secondary</button>
+<div class="example-line">
+  <button class="a-btn-xs a-danger">danger</button>
+  <button class="a-btn-sm a-primary">Primary</button>
+  <button class="a-btn a-secondary">Secondary</button>
+</div>
 
 :::details Click to view code
 
 ```html
-<button class="a-btn-xs a-danger">danger</button>
-<button class="a-btn-sm a-primary">Primary</button>
-<button class="a-btn a-secondary">Secondary</button>
+<div class="example-line">
+  <button class="a-btn-xs a-danger">danger</button>
+  <button class="a-btn-sm a-primary">Primary</button>
+  <button class="a-btn a-secondary">Secondary</button>
+</div>
 ```
-
 :::
 
 ## Customizing colors
