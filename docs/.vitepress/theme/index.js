@@ -2,7 +2,8 @@ import DefaultTheme from 'vitepress/theme'
 
 import { default as PreviewAndCode } from '../components/PreviewAndCode.vue';
 
-import './custom.css';
+import './variables.css';
+import './custom.scss';
 import '../../../src/css/main.scss';
 
 export default {

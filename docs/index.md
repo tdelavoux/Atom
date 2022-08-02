@@ -10,8 +10,8 @@ hero:
     alt: Atom Logo
   actions:
     - theme: brand
-      text: How to write these docs
-      link: /how-to-use
+      text: Getting started
+      link: /introduction
     - theme: alt
       text: View on GitHub
       link: https://github.com/tdelavoux/Atom

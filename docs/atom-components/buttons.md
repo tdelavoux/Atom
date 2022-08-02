@@ -6,7 +6,7 @@ title: Atom Buttons
 
 ## Basic Atom Buttons
 
-<div>
+<div class="example-line">
   <button class="a-btn a-primary">Primary</button>
   <button class="a-btn a-secondary">Secondary</button>
   <button class="a-btn a-light">Light</button>
@@ -16,7 +16,7 @@ title: Atom Buttons
   <button class="a-btn a-danger">Danger</button>
   <button class="a-btn a-dark">Dark</button>
 </div>
-<div>
+<div class="example-line">
   <button class="a-btn a-primary" disabled>Primary</button>
   <button class="a-btn a-secondary" disabled>Secondary</button>
   <button class="a-btn a-light" disabled>Light</button>
@@ -30,7 +30,7 @@ title: Atom Buttons
 ::: details Click to view code
 
 ```html
-<div>
+<div class="example-line">
   <button class="a-btn a-primary">Primary</button>
   <button class="a-btn a-secondary">Secondary</button>
   <button class="a-btn a-light">Light</button>
@@ -40,7 +40,7 @@ title: Atom Buttons
   <button class="a-btn a-danger">Danger</button>
   <button class="a-btn a-dark">Dark</button>
 </div>
-<div>
+<div class="example-line">
   <button class="a-btn a-primary" disabled>Primary</button>
   <button class="a-btn a-secondary" disabled>Secondary</button>
   <button class="a-btn a-light" disabled>Light</button>
@@ -56,7 +56,7 @@ title: Atom Buttons
 
 ## Full Buttons
 
-<div>
+<div class="example-line">
   <button class="a-btn a-full-primary">Primary</button>
   <button class="a-btn a-full-secondary">Secondary</button>
   <button class="a-btn a-full-light">Light</button>
@@ -66,7 +66,7 @@ title: Atom Buttons
   <button class="a-btn a-full-danger">Danger</button>
   <button class="a-btn a-full-dark">Dark</button>
 </div>
-<div>
+<div class="example-line">
   <button class="a-btn a-full-primary" disabled>Primary</button>
   <button class="a-btn a-full-secondary" disabled>Secondary</button>
   <button class="a-btn a-full-light" disabled>Light</button>
@@ -80,7 +80,7 @@ title: Atom Buttons
 ::: details Click to view code
 
 ```html
-<div>
+<div class="example-line">
   <button class="a-btn a-full-primary">Primary</button>
   <button class="a-btn a-full-secondary">Secondary</button>
   <button class="a-btn a-full-light">Light</button>
@@ -90,7 +90,7 @@ title: Atom Buttons
   <button class="a-btn a-full-danger">Danger</button>
   <button class="a-btn a-full-dark">Dark</button>
 </div>
-<div>
+<div class="example-line">
   <button class="a-btn a-full-primary" disabled>Primary</button>
   <button class="a-btn a-full-secondary" disabled>Secondary</button>
   <button class="a-btn a-full-light" disabled>Light</button>
@@ -106,43 +106,43 @@ title: Atom Buttons
 
 ## Half and link Buttons
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-primary">ANNULER</button>
   <button class="a-btn-sm a-half-primary">VALIDER</button>
   <button class="a-btn-sm a-full-primary">VALIDER</button>
 </div>
 
-<div class=" mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-success">ANNULER</button>
   <button class="a-btn-sm a-half-success">VALIDER</button>
   <button class="a-btn-sm a-full-success">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-secondary">ANNULER</button>
   <button class="a-btn-sm a-half-secondary">VALIDER</button>
   <button class="a-btn-sm a-full-secondary">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-light">ANNULER</button>
   <button class="a-btn-sm a-half-light">VALIDER</button>
   <button class="a-btn-sm a-full-light">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-danger">ANNULER</button>
   <button class="a-btn-sm a-half-danger">VALIDER</button>
   <button class="a-btn-sm a-full-danger">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-warning">ANNULER</button>
   <button class="a-btn-sm a-half-warning">VALIDER</button>
   <button class="a-btn-sm a-full-warning">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-info">ANNULER</button>
   <button class="a-btn-sm a-half-info">VALIDER</button>
   <button class="a-btn-sm a-full-info">VALIDER</button>
@@ -151,43 +151,43 @@ title: Atom Buttons
 :::details Click to view code
 
 ```html
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-primary">ANNULER</button>
   <button class="a-btn-sm a-half-primary">VALIDER</button>
   <button class="a-btn-sm a-full-primary">VALIDER</button>
 </div>
 
-<div class=" mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-success">ANNULER</button>
   <button class="a-btn-sm a-half-success">VALIDER</button>
   <button class="a-btn-sm a-full-success">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-secondary">ANNULER</button>
   <button class="a-btn-sm a-half-secondary">VALIDER</button>
   <button class="a-btn-sm a-full-secondary">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-light">ANNULER</button>
   <button class="a-btn-sm a-half-light">VALIDER</button>
   <button class="a-btn-sm a-full-light">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-danger">ANNULER</button>
   <button class="a-btn-sm a-half-danger">VALIDER</button>
   <button class="a-btn-sm a-full-danger">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-warning">ANNULER</button>
   <button class="a-btn-sm a-half-warning">VALIDER</button>
   <button class="a-btn-sm a-full-warning">VALIDER</button>
 </div>
 
-<div class="mt-1">
+<div class="example-line">
   <button class="a-btn-sm a-link-info">ANNULER</button>
   <button class="a-btn-sm a-half-info">VALIDER</button>
   <button class="a-btn-sm a-full-info">VALIDER</button>
